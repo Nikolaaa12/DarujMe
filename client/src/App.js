@@ -6,6 +6,7 @@ import SignIn from './pages/Sign-in';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import MyProfile from './pages/MyProfile';
+import Reports from './pages/Reports';
 import { useEffect } from 'react';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path='/pages/SignIn' element={<SignIn />}></Route>
           <Route path='/pages/register' element={<Register/>}></Route>
           <Route path='/pages/myprofile' element={<MyProfile/>}></Route>
+          <Route path='/pages/reports' element={<Reports/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
