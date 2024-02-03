@@ -1,0 +1,13 @@
+:root{
+    --primaryColor: rgb(43, 48, 53);
+    --secondaryColor: rgb(245,245,245);
+}
+
+
+body{
+    height: 100vh;
+}
+
+a{
+    text-decoration: none;
+}

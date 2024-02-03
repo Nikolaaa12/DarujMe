@@ -1,0 +1,98 @@
+.signIn{
+    display: flex;
+    width: 100vw;
+    background-image: linear-gradient(to top, rgba(25, 25, 112, 1), rgba(0, 150, 255, 0.6), rgba(25, 25, 112, 1));
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+}
+
+.signInWrapper{
+    width: calc(100% +180px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    background-color: transparent;
+    border: 2px solid rgba(255,255,255,0.3);
+    width: 450px;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    color: white;
+    border-radius: 28px;
+}
+
+.signInWrapper header{
+    font-size: 30px;
+    margin-top: 50px;
+    font-weight: 600;
+}
+
+.signInWrapper a{
+    text-decoration: none;
+    color: white;
+}
+
+@media only screen and (max-width: 767px) {
+    .signInWrapper{
+        margin-top: 20px;
+        width: 100vw;
+        border-radius: 0px;
+        padding-bottom: 15px;
+    }
+    
+}
+
+.signInInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 22vw;
+    
+}
+.signInInputs input{
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.forgot-password{
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2%;
+    align-items: center;
+    justify-content: center;
+}
+
+.signInButton{
+    width: 22vw;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 8px;
+    border: none;
+}
+
+.signInInputs input:hover{
+    box-shadow: 0 15px 20px rgba(0,0,0,0.5);
+}
+
+.signInButton:hover{
+    box-shadow: 0 15px 20px rgba(0,0,0,0.5);
+}
+
+.signInButton:active{
+    transform: scale(0.9);
+}
+
+@media only screen and (max-width: 767px) {
+    .signInInputs, .signInButton{
+        width: 95vw;
+    }
+}
+
+.registerNow{
+    display: flex;
+    flex-direction: column;
+}

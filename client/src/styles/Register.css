@@ -1,0 +1,22 @@
+.register{
+    width: 100vw;
+    background-image: linear-gradient(to right, rgb(0, 0, 60), rgba(26, 159, 195, 0.6), rgb(0, 0, 60));
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+}
+
+@media only screen and (max-width: 767px){
+    .kont button{
+        width: 95%;
+    }
+}
+
+.my-5{
+    text-shadow: 0 0 40px #fff;
+}
+
+
+
+
+
