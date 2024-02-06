@@ -34,6 +34,15 @@ namespace Repository
             var user = await this.GetOne<User>(id);
             return user;
         }
+        public async Task<User> GetUserByEmail(String? email)
+        {
+            return await this.Find<User>((a)=>a.Email==email);
+        }
+        public async Task<User> GetUserByUsername(String? username)
+        {
+            return await this.Find<User>((a)=>a.Username==username);
+            
+        }
 
         public async Task<User> Create(User user)
         {

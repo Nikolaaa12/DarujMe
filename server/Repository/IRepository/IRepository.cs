@@ -13,7 +13,7 @@ namespace Repository.IRepository
     {
         Task<T> GetOne<T>(String? id);
         Task<IQueryable<T>> GetAll<T>();
-        IQueryable<T> Find<T>(Expression<Func<T, bool>> predicate);
+        Task<T> Find<T>(Expression<Func<T, bool>> predicate);
         Task Add<T>(T obj);
         Task Delete<T>(String? id);
         Task Update<T>(String? id, T obj);

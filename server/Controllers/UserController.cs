@@ -5,7 +5,9 @@ using Repository;
 using Microsoft.AspNetCore.Mvc;
 using Repository.IRepository;
 using MongoDB.Bson;
-
+using DTOs;
+using backend.Services.IServices;
+using backend.Services;
 namespace Controllers
 {
 
@@ -13,15 +15,14 @@ namespace Controllers
     [Route("api/User")]
     public class UserController : ControllerBase
     {
-        private readonly MongoDbContext _mongoDBContext;
-        private IUserRepository _repository;
 
-        public UserController(MongoDbContext _mongoDBContext,IUserRepository _repository)
+        private IUserService _service;
+
+        public UserController(MongoDbContext _mongoDBContext)
         {
-            this._mongoDBContext = _mongoDBContext;
-            this._repository = _repository;
+            this._service=new UserService(_mongoDBContext);
         }
-        [HttpPost]
+   /*     [HttpPost]
         [Route("CreateUser")]
         public async Task<IActionResult> CreateUser([FromBody] User user)
         {
@@ -55,6 +56,65 @@ namespace Controllers
         {
             var a = await  _repository.GetAllUsers();
             return Ok(a);
+        }*/
+         [Route("Register")]
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] UserRegisterDTO user)
+        {
+            try
+            {
+                var result = await this._service.Register(user);
+                return Created("success", result);
+            } 
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("Login")]
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] UserLoginDTO user)
+        {
+            try
+            {
+                var result = await this._service.Login(user.Email, user.Password);
+
+                Response.Cookies.Append("jwt", result, new CookieOptions { HttpOnly = true, Secure = true, SameSite = SameSiteMode.None });
+
+                return Ok(new { message = "success" });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("GetUser")]
+        [HttpGet]
+        public async Task<IActionResult> GetUser()
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+
+                var user = await this._service.GetUser(jwt);
+
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return Unauthorized();
+            }
+        }
+
+        [Route("Logout")]
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            Response.Cookies.Delete("jwt", new CookieOptions { SameSite = SameSiteMode.None, Secure = true });
+
+            return Ok(new { message = "success" });
         }
 
     }

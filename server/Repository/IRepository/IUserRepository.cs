@@ -13,6 +13,8 @@ namespace Repository.IRepository
         Task<IQueryable<User>> GetAllUsers();
         Task<User> GetUserById(String? id);
         Task DeleteUser(String? Id);
+        Task<User> GetUserByEmail(String? email);
+        Task<User> GetUserByUsername(String? username);
         Task<User> UpdateUser(User user);
         Task<User> Create(User user);
     }

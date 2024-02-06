@@ -41,10 +41,11 @@ namespace Repository
             return result.ToList().AsQueryable();
         }
 
-        public IQueryable<T> Find<T>(Expression<Func<T, bool>> predicate)
+        public async Task<T> Find<T>(Expression<Func<T, bool>> predicate)
         {
             var collection = _context._database.GetCollection<T>(typeof(T).Name);
-            return collection.Find(predicate).ToEnumerable().AsQueryable();
+            var a = await collection.Find(predicate).FirstOrDefaultAsync();
+            return a;
         }
 
         public async Task Add<T>(T obj)

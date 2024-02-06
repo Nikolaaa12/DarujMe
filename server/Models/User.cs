@@ -25,6 +25,21 @@ namespace Models{
         {
             
         }
+        public User(string? name,string? lastname,string? username,string? email,string? password,string? city,string? adress,string? phoneNumber)
+        {
+            this.Name=name;
+            this.Lastname=lastname;
+            this.Username=username;
+            this.Email=email;
+            this.Password=password;
+            this.City=city;
+            this.Adress=adress;
+            this.PhoneNumber=phoneNumber;
+            this.Admin=false;
+            this.Products= new List<Product>();
+            this.ProfilePicture = null;
+
+        }
 
     }
 
