@@ -25,8 +25,9 @@ function CustomNavbar() {
                         </Nav>
 
                         <Nav className="me-auto">
-                            <Nav.Link>Products</Nav.Link>
-                            <Nav.Link>About us</Nav.Link>
+                            <Nav.Link href="/pages/addProduct"><button className='navbarBtn'>Add product</button></Nav.Link>
+                            <Nav.Link style={{display: 'flex', alignItems: 'center'}}>Products</Nav.Link>
+                            <Nav.Link style={{display: 'flex', alignItems: 'center'}}>About us</Nav.Link>
                         </Nav>
                         
                         <Nav>
