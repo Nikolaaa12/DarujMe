@@ -1,12 +1,13 @@
 using Models;
-using Services;
-
+using Context;
+using Repository;
+using Repository.IRepository;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
-builder.Services.AddSingleton<MongoDBService>();
+builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add services to the container.
 
