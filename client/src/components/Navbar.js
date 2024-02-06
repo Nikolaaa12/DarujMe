@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useLocation } from 'react-router-dom';
 
+
 function CustomNavbar() {
 
     return (
@@ -26,7 +27,7 @@ function CustomNavbar() {
 
                         <Nav className="me-auto">
                             <Nav.Link href="/pages/addProduct"><button className='navbarBtn'>Add product</button></Nav.Link>
-                            <Nav.Link style={{display: 'flex', alignItems: 'center'}}>Products</Nav.Link>
+                            <Nav.Link href='/pages/products' style={{display: 'flex', alignItems: 'center'}}>Products</Nav.Link>
                             <Nav.Link style={{display: 'flex', alignItems: 'center'}}>About us</Nav.Link>
                         </Nav>
                         

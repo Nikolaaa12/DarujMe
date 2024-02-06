@@ -1,7 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 import '../styles/MyProfile.css';
 
-function MyProfile() {
+function MyProfile({userId}) {
     return (
         <div className="gradient-custom-2" style={{ backgroundImage: 'linear-gradient(to top, rgba(25, 25, 112, 1), rgba(0, 150, 255, 0.6), rgba(25, 25, 112, 1))' }}>
             <MDBContainer className="py-5 h-100">
@@ -66,6 +66,7 @@ function MyProfile() {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
+            <p style={{color: 'white'}}>{userId}</p>
         </div>
     )
 }

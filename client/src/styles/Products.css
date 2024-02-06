@@ -1,0 +1,28 @@
+.tipFilterBar{
+    width: 100vw;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: fit-content;
+}
+
+.tipFilterBar button{
+    color: white;
+    background-color: blue;
+    height: 3rem;
+    border: none;
+}
+
+.tipFilterBar button:hover{
+    background-color: darkblue;
+}
+
+.tipDugme.active{
+    background-color: darkblue;
+}
+
+.prikaziSve:hover{
+    background-color: darkblue;
+}

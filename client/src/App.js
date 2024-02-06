@@ -10,6 +10,7 @@ import MyProfile from './pages/MyProfile';
 import Reports from './pages/Reports';
 import { useEffect } from 'react';
 import AddProduct from './pages/AddProduct';
+import Products from './pages/Products';
 
 function App() {
   const [userId, setUserId] = useState(-1);
@@ -59,9 +60,10 @@ function App() {
           <Route path='/pages/about' element={<About />}></Route>
           <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
           <Route path='/pages/register' element={<Register/>}></Route>
-          <Route path='/pages/myprofile' element={<MyProfile/>}></Route>
+          <Route path='/pages/myprofile' element={<MyProfile userId={userId}/>}></Route>
           <Route path='/pages/reports' element={<Reports/>}></Route>
           <Route path='/pages/addProduct' element={<AddProduct/>}></Route>
+          <Route path='/pages/products' element={<Products/>}></Route>
           
         </Routes>
       </BrowserRouter>
