@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import MyProfile from './pages/MyProfile';
 import Reports from './pages/Reports';
 import { useEffect } from 'react';
+import AddProduct from './pages/AddProduct';
 
 function App() {
 
@@ -33,6 +34,8 @@ function App() {
           <Route path='/pages/register' element={<Register/>}></Route>
           <Route path='/pages/myprofile' element={<MyProfile/>}></Route>
           <Route path='/pages/reports' element={<Reports/>}></Route>
+          <Route path='/pages/addProduct' element={<AddProduct/>}></Route>
+          
         </Routes>
       </BrowserRouter>
     </>
