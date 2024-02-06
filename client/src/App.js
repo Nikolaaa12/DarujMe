@@ -1,5 +1,6 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { useState } from 'react';
 import Home from './pages/Home';
 import About from './pages/About';
 import SignIn from './pages/Sign-in';
@@ -11,6 +12,32 @@ import { useEffect } from 'react';
 import AddProduct from './pages/AddProduct';
 
 function App() {
+  const [userId, setUserId] = useState(-1);
+  //const Navigate = useNavigate();
+
+  useEffect(() => {
+    (
+      async () => {
+        try {
+          const response = await fetch('http://localhost:5238/api/User/GetUser', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            mode: 'cors',
+          });
+
+          if (response.status !== 200) {
+           // <Navigate to="/login" />;
+            return;
+          }
+
+          const content = await response.json();
+          setUserId(content.id);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+    )();
+  }, [userId]);
 
   useEffect(() => {
     // Pronađite navbar element po id-u
@@ -30,7 +57,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path='/pages/about' element={<About />}></Route>
-          <Route path='/pages/SignIn' element={<SignIn />}></Route>
+          <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
           <Route path='/pages/register' element={<Register/>}></Route>
           <Route path='/pages/myprofile' element={<MyProfile/>}></Route>
           <Route path='/pages/reports' element={<Reports/>}></Route>
@@ -38,6 +65,7 @@ function App() {
           
         </Routes>
       </BrowserRouter>
+      <div>{userId}</div>
     </>
   );
 }
