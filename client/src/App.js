@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import AddProduct from './pages/AddProduct';
 import Products from './pages/Products';
 import MyProducts from './pages/MyProducts';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   const [userId, setUserId] = useState(-1);
@@ -66,6 +67,7 @@ function App() {
           <Route path='/pages/addProduct' element={<AddProduct/>}></Route>
           <Route path='/pages/products' element={<Products/>}></Route>
           <Route path='/pages/myproducts' element={<MyProducts/>}></Route>
+          <Route path='/pages/editprofile' element={<EditProfile/>}></Route>
         </Routes>
       </BrowserRouter>
       <div>{userId}</div>

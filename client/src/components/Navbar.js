@@ -74,7 +74,7 @@ function CustomNavbar() {
                             <NavDropdown style={{display: 'flex', alignItems: 'center'}}  title="Profile" id="collapsible-nav-dropdown">
                                 <NavDropdown.Item href="/pages/myprofile">MyProfile</NavDropdown.Item>
                                 <NavDropdown.Item href="/pages/myproducts">MyProducts</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Edit profile</NavDropdown.Item>
+                                <NavDropdown.Item href="pages/editprofile">Edit profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={logout}>Log out</NavDropdown.Item>
                             </NavDropdown>
