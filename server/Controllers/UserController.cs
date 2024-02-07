@@ -42,14 +42,21 @@ namespace Controllers
         {
             await _repository.DeleteUser(Id);
             return Ok();
-        }
+        }*/
         [HttpGet]
-        [Route("GetUser")]
-        public async Task<IActionResult> GetUser(String? id)
+        [Route("GetUserById")]
+        public async Task<IActionResult> GetUserById(String? id)
         {
-            var a =await _repository.GetUserById(id);
+            try
+            {
+            var a =await _service.Repository.GetUserById(id);
             return Ok(a);
-        }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }/*
         [HttpGet]
         [Route("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()

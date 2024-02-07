@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Navbar.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -8,7 +9,44 @@ import { useLocation } from 'react-router-dom';
 
 
 function CustomNavbar() {
-
+    var navigate = useNavigate();
+    const logout = () => {
+        fetch('http://localhost:5238/api/User/Logout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          mode: 'cors',
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(() => {/*
+            setLogovanikorisnik(-1);
+            setUser({
+              email: '',
+              username: '',
+              name: '',
+              admin: false,
+              lastName: '',
+              city: '',
+              description: '',
+              pricePerHour: 0,
+            });*/
+            const currentPath = window.location.pathname;
+    
+            if (currentPath === '/') {
+              window.location.reload();
+            } else {
+              navigate('/');
+            }
+          })
+          .catch(error => {
+            console.error('Logout error:', error);
+          });
+      };
     return (
         <>
             <Navbar id='myNavbar' fixed="top" collapseOnSelect expand="lg" bg="light" data-bs-theme="light">
@@ -38,7 +76,7 @@ function CustomNavbar() {
                                 <NavDropdown.Item href="#action/3.2">MyProducts</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Edit profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.2">Log out</NavDropdown.Item>
+                                <NavDropdown.Item onClick={logout}>Log out</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
