@@ -1,4 +1,4 @@
-using backend.Services.IServices;
+using Services.IServices;
 using Models;
 using DTOs;
 using Repository;
@@ -6,7 +6,7 @@ using Helpers;
 using Context;
 using BCrypt.Net;
 
-namespace backend.Services
+namespace Services
 {
     public class UserService : IUserService
     {

@@ -2,7 +2,7 @@ using Models;
 using DTOs;
 using Repository;
 
-namespace backend.Services.IServices
+namespace Services.IServices
 {
     public interface IUserService
     {
