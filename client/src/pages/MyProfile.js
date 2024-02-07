@@ -1,7 +1,28 @@
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 import '../styles/MyProfile.css';
-
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 function MyProfile({userId}) {
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+          try {
+            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+            
+            if (!response.data) {
+              setUser(null);
+            } else {
+              setUser(response.data);
+            }
+          } catch (error) {
+            console.error('Error fetching user:', error);
+          }
+        };
+        fetchUser();
+    }, [userId]);
+
     return (
         <div className="gradient-custom-2" style={{ backgroundImage: 'linear-gradient(to top, rgba(25, 25, 112, 1), rgba(0, 150, 255, 0.6), rgba(25, 25, 112, 1))' }}>
             <MDBContainer className="py-5 h-100">
@@ -14,16 +35,16 @@ function MyProfile({userId}) {
                                         alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }} />
                                 </div>
                                 <div className="ms-3" style={{ marginTop: '130px' }}>
-                                    <MDBTypography tag="h5">Name: </MDBTypography>
-                                    <MDBTypography tag="h5">Last name: </MDBTypography>
+                                    <MDBTypography tag="h5">Name: {user ? user.name : 'Loading...'}</MDBTypography>
+                                    <MDBTypography tag="h5">Lastname: {user ? user.lastname : 'Loading...'}</MDBTypography>
                                     
                                 </div>
                             </div>
                             <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                                 <div className="d-flex justify-content-end text-center py-1">
                                     <div>
-                                        <MDBCardText className="mb-1 h5">253</MDBCardText>
-                                        <MDBCardText className="small text-muted mb-0">Advertisements added</MDBCardText>
+                                        <MDBCardText className="mb-1 h5">{user ? user.products.length: 'Loading...'}</MDBCardText>
+                                        <MDBCardText className="small text-muted mb-0">Products added</MDBCardText>
                                     </div>
                                 </div>
                             </div>
@@ -31,11 +52,10 @@ function MyProfile({userId}) {
                                 <div className="mb-5">
                                     <p className="lead fw-normal mb-1">Contact info</p>
                                     <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                                        <MDBCardText className="font-italic mb-0">Email: </MDBCardText>
-                                        <MDBCardText className="font-italic mb-0">Phone number: </MDBCardText>
-                                        <MDBCardText className="font-italic mb-0">City: </MDBCardText>
-                                        <MDBCardText className="font-italic mb-0">Adress: </MDBCardText>
-                                        <MDBCardText className="font-italic mb-0">Zip/Postal code: </MDBCardText>
+                                        <MDBCardText className="font-italic mb-0">Email: {user ? user.email : 'Loading...'}</MDBCardText>
+                                        <MDBCardText className="font-italic mb-0">Phone number: {user ? user.phoneNumber : 'Loading...'} </MDBCardText>
+                                        <MDBCardText className="font-italic mb-0">City: {user ? user.city : 'Loading...'}</MDBCardText>
+                                        <MDBCardText className="font-italic mb-0">Address: {user ? user.adress : 'Loading...'}</MDBCardText>
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-between align-items-center mb-4">
@@ -66,7 +86,6 @@ function MyProfile({userId}) {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-            <p style={{color: 'white'}}>{userId}</p>
         </div>
     )
 }
