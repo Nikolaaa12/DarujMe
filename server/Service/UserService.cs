@@ -87,23 +87,25 @@ namespace Services
 
             return jwt;
         }
-        /*
-                public async Task UpdateProfile(UserUpdateDTO user)
+        
+                public async Task<User> UpdateUser(UserUpdateDTO user)
                 {
                     if (user != null)
                     {
-                        var userFound = await this.userRepository.GetUserById(user.Id);
+                        var userFound = await this.Repository.GetUserById(user.Id);
                         userFound.Name = user.Name;
-                        userFound.LastName = user.LastName;
+                        userFound.Lastname = user.LastName;
                         userFound.City =user.City;
-                        userFound.Description=user.Description;
-                        userFound.PricePerHour=user.PricePerHour;
                         userFound.Adress=user.Adress;
                         userFound.PhoneNumber=user.PhoneNumber;
-                        this.userRepository.Update(userFound);
+                        return await this.Repository.UpdateUser(userFound);
+                    }
+                    else
+                    {
+                        throw new Exception("User With that Id doesnt exist");
                     }
                 }
-*/
+
                 public async Task<User> GetUser(string jwt)
                 {
                     var token = jwtService.Verify(jwt);

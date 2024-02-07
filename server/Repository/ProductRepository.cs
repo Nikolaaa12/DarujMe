@@ -29,7 +29,7 @@ namespace Repository
         public async Task<IQueryable<Product>> GetProductsByTypeId(string? id)
         {
             var product = await this.FindMore<Product>((products)=>products.ProductTypeId==id);
-            return product;
+            return product; 
         }
 
         public async Task<IQueryable<Product>> GetProductsByOwnerId(string? id)

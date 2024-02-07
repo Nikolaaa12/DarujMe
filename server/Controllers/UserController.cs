@@ -114,6 +114,21 @@ namespace Controllers
                 return Unauthorized();
             }
         }
+        [Route("EditUser")]
+        [HttpPut]
+        public async Task<IActionResult> EditUser([FromBody] UserUpdateDTO us)
+        {
+            try
+            {
+                var user = await this._service.UpdateUser(us);
+
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         [Route("Logout")]
         [HttpPost]

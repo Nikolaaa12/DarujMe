@@ -65,7 +65,13 @@ namespace Controllers
             var a = await _service.CreateProduct(product);
             return Ok(a);
         }
-
+        [HttpGet]
+        [Route("GetProductsByOwnerId")]
+        public async Task<IActionResult> GetProductsByOwnerId(String? id)
+        {
+            var a = await _service.Repository.GetProductsByOwnerId(id);
+            return Ok(a);
+        }
 
 
     }

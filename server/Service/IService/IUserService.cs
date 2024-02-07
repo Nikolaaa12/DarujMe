@@ -11,6 +11,7 @@ namespace Services.IServices
         Task<string> Login(string email, string password);
       //  Task UpdateProfile(UserUpdateDTO user);
         Task<User> GetUser(string jwt);
+        Task<User> UpdateUser(UserUpdateDTO user);
      //   Task<User> Downvote(int id);
       //  Task<User> GiveAdmin(int id);
       //  Task<User> Upvote(int id);

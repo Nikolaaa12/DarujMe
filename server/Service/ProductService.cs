@@ -26,8 +26,6 @@ namespace Services
         {
             Product product1 = new Product(product.Name,product.Description,product.ProfilePicture,product.ProductTypeId,product.OwnerId);
             var type = await TypeService.Repository.GetTypeById(product.ProductTypeId);
-            var owner = await userService.Repository.GetUserById(product.OwnerId);
-            product1.Owner=owner;
             product1.TypeofProduct=type;
             var pro = await this.Repository.Create(product1);
             return pro;

@@ -16,7 +16,7 @@ namespace Models{
         public string? ProductTypeId { get; set; }
         public ProductType? TypeofProduct { get; set; }
         public string? OwnerId { get; set; }
-        public User? Owner { get; set; }
+        public Boolean Available { get; set; }
 
         public Product()
         {
@@ -29,8 +29,8 @@ namespace Models{
             this.ProfilePicture = profilePicture;
             this.ProductTypeId = typeid;
             this.OwnerId = ownerid;
-            this.Owner = null;
             this.TypeofProduct = null;
+            this.Available = true;
         }
 
     }
