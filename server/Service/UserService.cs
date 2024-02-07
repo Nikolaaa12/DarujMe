@@ -5,6 +5,7 @@ using Repository;
 using Helpers;
 using Context;
 using BCrypt.Net;
+using Services;
 
 namespace Services
 {
