@@ -15,8 +15,8 @@ namespace Repository
 
         public async Task<IQueryable<ProductType>> GetAllTypes()
         {
-            var user = await this.GetAll<ProductType>();
-            return user;
+            var types = await this.GetAll<ProductType>();
+            return types;
         }
 
         public async Task DeleteType(String? Id)
@@ -26,8 +26,8 @@ namespace Repository
 
         public async Task<ProductType> GetTypeById(String? id)
         {
-            var user = await this.GetOne<ProductType>(id);
-            return user;
+            var types = await this.GetOne<ProductType>(id);
+            return types;
         }
         public async Task<ProductType> Create(String? name)
         {

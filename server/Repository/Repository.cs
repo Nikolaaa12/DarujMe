@@ -47,6 +47,12 @@ namespace Repository
             var a = await collection.Find(predicate).FirstOrDefaultAsync();
             return a;
         }
+        public async Task<IQueryable<T>> FindMore<T>(Expression<Func<T, bool>> predicate)
+        {
+            var collection = _context._database.GetCollection<T>(typeof(T).Name);
+            var a = await collection.FindAsync(predicate);//Find(predicate);
+            return (IQueryable<T>)a;
+        }
 
         public async Task Add<T>(T obj)
         {

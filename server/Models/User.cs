@@ -3,7 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Net.Http.Headers;
 using System.Text.Json.Serialization;
 
-namespace Models{
+namespace Models
+{
 
     public class User:IEntity{
 
@@ -41,6 +42,10 @@ namespace Models{
 
         }
 
+        public static implicit operator User(Task<User> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

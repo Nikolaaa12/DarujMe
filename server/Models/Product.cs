@@ -11,13 +11,26 @@ namespace Models{
         [BsonRepresentation(BsonType.ObjectId)]
         public String? Id { get; set; }
         public string? Name { get; set; }
+        public string? Description { get; set; }
         public string? ProfilePicture { get; set; }
-        public int UserId { get; set; }
+        public string? ProductTypeId { get; set; }
+        public ProductType? TypeofProduct { get; set; }
+        public string? OwnerId { get; set; }
         public User? Owner { get; set; }
 
         public Product()
         {
             
+        }
+        public Product(String name,string description,string profilePicture,string typeid,string ownerid)
+        {
+            this.Name = name;
+            this.Description = description;
+            this.ProfilePicture = profilePicture;
+            this.ProductTypeId = typeid;
+            this.OwnerId = ownerid;
+            this.Owner = null;
+            this.TypeofProduct = null;
         }
 
     }

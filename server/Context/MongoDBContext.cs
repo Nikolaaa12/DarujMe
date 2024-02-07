@@ -18,6 +18,7 @@ namespace Context
 
         public IMongoCollection<User> Users => _database.GetCollection<User>("User");
         public IMongoCollection<User> ProductTypes => _database.GetCollection<User>("ProductType");
+        public IMongoCollection<Product> Products => _database.GetCollection<Product>("Product");
 
         public async Task CreateAsync(User user)
         {

@@ -3,7 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Net.Http.Headers;
 using System.Text.Json.Serialization;
 
-namespace Models{
+namespace Models
+{
 
     public class ProductType:IEntity{
 
@@ -16,6 +17,10 @@ namespace Models{
             
         }
 
+        public static implicit operator ProductType(Task<ProductType> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
