@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Dell\\Desktop\\DarujMe\\DarujMe\\server\\server.csproj": {}
+    "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Dell\\Desktop\\DarujMe\\DarujMe\\server\\server.csproj": {
+    "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Dell\\Desktop\\DarujMe\\DarujMe\\server\\server.csproj",
+        "projectUniqueName": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj",
         "projectName": "server",
-        "projectPath": "c:\\Users\\Dell\\Desktop\\DarujMe\\DarujMe\\server\\server.csproj",
-        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Dell\\Desktop\\DarujMe\\DarujMe\\server\\obj\\",
+        "projectPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj",
+        "packagesPath": "C:\\Users\\mihaj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mihaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

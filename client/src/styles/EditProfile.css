@@ -1,0 +1,12 @@
+.gradient-custom-2 {
+    background-image: linear-gradient(to top, rgba(25, 25, 112, 1), rgba(0, 150, 255, 0.6), rgba(25, 25, 112, 1));
+  }
+  
+  .form-container {
+    margin: 50px 0;
+  }
+  
+  .form-container input {
+    margin-bottom: 15px;
+  }
+  
