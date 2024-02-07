@@ -1,0 +1,29 @@
+/* Product.css */
+.product-card {
+    width: 200px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .product-content {
+    padding: 10px;
+  }
+  
+  .download-button {
+    background: #4c6faf;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  

@@ -1458,19 +1458,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Korisnik\\.nuget\\packages\\": {}
+    "C:\\Users\\mihaj\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\ProjekatNBP\\DarujMe\\server\\server.csproj",
+      "projectUniqueName": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj",
       "projectName": "server",
-      "projectPath": "C:\\Users\\Korisnik\\Desktop\\ProjekatNBP\\DarujMe\\server\\server.csproj",
-      "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Korisnik\\Desktop\\ProjekatNBP\\DarujMe\\server\\obj\\",
+      "projectPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj",
+      "packagesPath": "C:\\Users\\mihaj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mihaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1478,6 +1483,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

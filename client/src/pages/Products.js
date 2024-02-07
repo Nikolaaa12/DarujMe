@@ -3,65 +3,71 @@ import '../styles/Products.css';
 import Product from '../components/Product';
 
 function Products() {
-    const nizObjekata = [
-        { ime: 'Frizider', tip: 'Bela tehnika' },
-        { ime: 'Farmerice', tip: 'Odeca' },
-        { ime: 'Stolica', tip: 'Namestaj' },
-        { ime: 'Majica', tip: 'Odeca' }
-    ];
-    const [nameValue, setNameValue] = useState('');
-    const [type, setType] = useState(null);
+  const nizObjekata = [
+    { ime: 'Frizider', tip: 'Bela tehnika' },
+    { ime: 'Farmerice', tip: 'Odeca' },
+    { ime: 'Stolica', tip: 'Namestaj' },
+    { ime: 'Majica', tip: 'Odeca' },
+  ];
 
-    const handleNameChange = (event) => {
-        setNameValue(event.target.value);
-    };
+  const [nameValue, setNameValue] = useState('');
+  const [type, setType] = useState(null);
 
-    const handleTypeChange = (type) => {
-        setType(type);
-    };
-    const filtriraniObjekti = nizObjekata.filter(objekat => {
-        return objekat.ime.toLowerCase().includes(nameValue.toLowerCase());
-    });
+  const handleNameChange = (event) => {
+    setNameValue(event.target.value);
+  };
 
-    const filteredProducts = type ? filtriraniObjekti.filter(objekat => objekat.tip === type) : filtriraniObjekti;
+  const handleTypeChange = (selectedType) => {
+    setType(selectedType);
+  };
 
-    const buttons = document.querySelectorAll('.tipDugme');
-    const buttonShowAll = document.getElementById('prikaziSve');
+  const handleButtonClick = (selectedType) => {
+    handleTypeChange(selectedType === type ? null : selectedType);
+  };
 
-    buttons.forEach(button => {
-        button.addEventListener('click', ()=>{
-            if (button!==buttonShowAll){
-                buttons.forEach(btn=>{
-                    btn.classList.remove('active');
-                });
-                button.classList.add('active');
-            }
-            else{
-                buttons.forEach(btn=>{
-                    btn.classList.remove('active');
-                });
-            }
-        })
-    })
-    
-    
+  const filteredProducts = nizObjekata.filter((objekat) => {
+    return objekat.ime.toLowerCase().includes(nameValue.toLowerCase());
+  });
 
-    return (
-        <div>
-            <input type='text' placeholder='Search by name...' onChange={handleNameChange}></input>
-            <br />
-            <div className='tipFilterBar'>
-                <button className='tipDugme' onClick={() => handleTypeChange('Bela tehnika')}>Bela tehnika</button>
-                <button className='tipDugme' onClick={() => handleTypeChange('Namestaj')}>Namestaj</button>
-                <button className='tipDugme' onClick={() => handleTypeChange('Odeca')}>Odeca</button>
-                <button id='prikaziSve' className='tipDugme' onClick={() => handleTypeChange(null)}>Prikazi sve</button>
-            </div>
-            {filteredProducts.map((objekat, index) => (
-                <Product key={index} objekat={objekat} />
-            ))}
-            <p>{filteredProducts.length}</p>
-        </div>
-    );
+  const filteredAndTypedProducts = type
+    ? filteredProducts.filter((objekat) => objekat.tip === type)
+    : filteredProducts;
+
+  return (
+    <div>
+      <div className='inputContainer'>
+        <input
+          type='text'
+          placeholder='Search by name...'
+          onChange={handleNameChange}
+        />
+      </div>
+      <div className='tipFilterBar'>
+        {['Bela tehnika', 'Namestaj', 'Odeca'].map((btnType) => (
+          <button
+            key={btnType}
+            className={`tipDugme${type === btnType ? ' active' : ''}`}
+            onClick={() => handleButtonClick(btnType)}
+          >
+            {btnType}
+          </button>
+        ))}
+        <button
+          id='prikaziSve'
+          className={`tipDugme${type === null ? ' active' : ''}`}
+          onClick={() => handleButtonClick(null)}
+        >
+          Prikazi sve
+        </button>
+      </div>
+      <div className='productContainer'>
+        {filteredAndTypedProducts.map((objekat, index) => (
+          <Product key={index} objekat={objekat} />
+        ))}
+      </div>
+      <p>Total: {filteredAndTypedProducts.length}</p>
+    </div>
+  );
 }
 
 export default Products;

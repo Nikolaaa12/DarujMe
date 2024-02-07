@@ -66,7 +66,7 @@ function CustomNavbar() {
                         <Nav className="me-auto">
                             <Nav.Link href="/pages/addProduct"><button className='navbarBtn'>Add product</button></Nav.Link>
                             <Nav.Link href='/pages/products' style={{display: 'flex', alignItems: 'center'}}>Products</Nav.Link>
-                            <Nav.Link style={{display: 'flex', alignItems: 'center'}}>About us</Nav.Link>
+                            <Nav.Link href='/pages/about'style={{display: 'flex', alignItems: 'center'}}>About us</Nav.Link>
                         </Nav>
                         
                         <Nav>

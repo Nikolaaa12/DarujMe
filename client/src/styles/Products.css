@@ -26,3 +26,33 @@
 .prikaziSve:hover{
     background-color: darkblue;
 }
+
+.inputContainer {
+    margin-bottom: 10px;
+  }
+  
+  .tipFilterBar {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .tipDugme {
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .tipDugme.active {
+    background-color: #18168f;
+  }
+  
+.productContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto; 
+    max-width: 1200px; 
+  }
+  
