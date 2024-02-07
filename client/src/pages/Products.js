@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Products.css';
 import Product from '../components/Product';
+import axios from 'axios';
 
 function Products() {
-  const nizObjekata = [
-    { ime: 'Frizider', tip: 'Bela tehnika' },
-    { ime: 'Farmerice', tip: 'Odeca' },
-    { ime: 'Stolica', tip: 'Namestaj' },
-    { ime: 'Majica', tip: 'Odeca' },
-  ];
+
+  const [productTypes, setProductTypes] = useState([]);
+
+  useEffect(() => {
+    const fetchProductTypes = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5238/api/ProductType/GetAllProductType`);
+        setProductTypes(response.data);
+      } catch (error) {
+        console.error('Error fetching product types:', error);
+      }
+    };
+
+    fetchProductTypes();
+  }, []);
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5238/api/Product/GetAllProducts`);
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching product types:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const [nameValue, setNameValue] = useState('');
   const [type, setType] = useState(null);
@@ -17,55 +42,55 @@ function Products() {
     setNameValue(event.target.value);
   };
 
-  const handleTypeChange = (selectedType) => {
-    setType(selectedType);
+  const handleTypeChange = (type) => {
+    setType(type);
+    console.log(type);
   };
 
-  const handleButtonClick = (selectedType) => {
-    handleTypeChange(selectedType === type ? null : selectedType);
-  };
 
-  const filteredProducts = nizObjekata.filter((objekat) => {
-    return objekat.ime.toLowerCase().includes(nameValue.toLowerCase());
+  const filtriraniObjekti = products.filter(objekat => {
+    return objekat && objekat.name.toLowerCase().includes(nameValue.toLowerCase());
   });
 
-  const filteredAndTypedProducts = type
-    ? filteredProducts.filter((objekat) => objekat.tip === type)
-    : filteredProducts;
+  const filteredProducts = type ? filtriraniObjekti.filter(objekat => objekat.typeofProduct && objekat.typeofProduct.name === type) : filtriraniObjekti;
+
+  const buttons = document.querySelectorAll('.tipDugme');
+  const buttonShowAll = document.getElementById('prikaziSve');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (button !== buttonShowAll) {
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+        });
+        button.classList.add('active');
+      }
+      else {
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+        });
+      }
+    })
+  })
+
 
   return (
-    <div>
-      <div className='inputContainer'>
-        <input
-          type='text'
-          placeholder='Search by name...'
-          onChange={handleNameChange}
-        />
-      </div>
+    <div className='products'>
+      <br />
       <div className='tipFilterBar'>
-        {['Bela tehnika', 'Namestaj', 'Odeca'].map((btnType) => (
-          <button
-            key={btnType}
-            className={`tipDugme${type === btnType ? ' active' : ''}`}
-            onClick={() => handleButtonClick(btnType)}
-          >
-            {btnType}
-          </button>
+        {productTypes.map(type => (
+          <button className='tipDugme' onClick={() => handleTypeChange(type.name)}>{type.name}</button>
         ))}
-        <button
-          id='prikaziSve'
-          className={`tipDugme${type === null ? ' active' : ''}`}
-          onClick={() => handleButtonClick(null)}
-        >
-          Prikazi sve
-        </button>
+        <button id='prikaziSve' className='tipDugme' onClick={() => handleTypeChange(null)}>Prikazi sve</button>
       </div>
-      <div className='productContainer'>
-        {filteredAndTypedProducts.map((objekat, index) => (
-          <Product key={index} objekat={objekat} />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
+        <input type='text' placeholder='Search by name...' onChange={handleNameChange}></input>
+      </div>
+      <div className='products-wrapper'>
+        {filteredProducts.map((product, index) => (
+          <Product key={index} product={product} />
         ))}
       </div>
-      <p>Total: {filteredAndTypedProducts.length}</p>
     </div>
   );
 }
