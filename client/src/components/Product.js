@@ -5,12 +5,10 @@ import '../styles/Product.css';
 function Product({ objekat }) {
   const [isSelected, setSelected] = useState(false);
 
-  const toggleSelection = () => {
-    setSelected(!isSelected);
-  };
+
 
   return (
-    <div className={`product-card ${isSelected ? 'selected' : ''}`} onClick={toggleSelection}>
+    <div className={`product-card ${isSelected ? 'selected' : ''}`} >
       <img src={image} alt="Product" />
       <div className="product-content">
         <h2>{objekat.ime}</h2>
