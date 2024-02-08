@@ -49,5 +49,10 @@ namespace Repository
             await this.Add<Product>(product);
             return product;
         }
+        public async Task<Product> UpdateProduct(Product product)
+        {
+            await this.Update<Product>(product.Id, product);
+            return product;
+        }
     }
 }

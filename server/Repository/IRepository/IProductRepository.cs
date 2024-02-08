@@ -16,5 +16,6 @@ namespace Repository.IRepository
         Task<IQueryable<Product>> GetProductsByOwnerId(String? id);
         Task DeleteProduct(String? Id);
         Task<Product> Create(Product product);
+        Task<Product> UpdateProduct(Product product);
     }
 }

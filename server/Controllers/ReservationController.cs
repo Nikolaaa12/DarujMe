@@ -1,11 +1,6 @@
-using System;
 using Context;
 using Models;
-using Repository;
 using Microsoft.AspNetCore.Mvc;
-using Repository.IRepository;
-using MongoDB.Bson;
-using DTOs;
 using Services.IServices;
 using Services;
 namespace Controllers
@@ -50,7 +45,7 @@ namespace Controllers
         {
             try
             {
-                await _service.Repository.DeleteReservation(id);
+                await _service.DeleteReservation(id);
                 return Ok();
             }
             catch (Exception e)
@@ -62,7 +57,7 @@ namespace Controllers
         [Route("CreateReservation")]
         public async Task<IActionResult> CreateReservation([FromBody] Reservation reservation)
         {
-            var a = await _service.Repository.Create(reservation);
+            var a = await _service.CreateReservation(reservation);
             return Ok(a);
         }
         [HttpGet]
