@@ -5,29 +5,38 @@ import axios from 'axios';
 
 function Edit({userId}) {
 
-    const [user, setUser] = useState(null);
+  const url='http://localhost:5238/api/User/EditUser';
 
-    useEffect(() => {
-        const fetchUser = async () => {
-          try {
-            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
-            
-            if (!response.data) {
-              setUser(null);
-            } else {
-              setUser(response.data);
-            }
-          } catch (error) {
-            console.error('Error fetching user:', error);
-          }
-        };
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
         
-        fetchUser();
+        if (!response.data) {
+          setUser(null);
+        } else {
+          setUser(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+    fetchUser();
+}, [userId]);
 
-    }, [userId]);
-
-  
-
+function submit(e) {
+  e.preventDefault();
+  axios.put(url, {
+    id: user.id,
+    name: user.name,
+    lastname: user.lastname,
+    phoneNumber: user.phoneNumber,
+    adress: user.adress,
+    city: user.city
+  })
+}
 
   
   return (
@@ -39,14 +48,14 @@ function Edit({userId}) {
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5 form-container">
                   <h2 className="h2-responsive text-center mb-4">Edit Profile</h2>
-                  <form>
+                  <form onSubmit={submit}>
                     <label htmlFor="name">Name</label>
                     <MDBInput
                       id="name"
                       type="text"
                       name="name"
                       value={user&& user.name}
-                      onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                      onChange={(e) => setUser({ ...user, name: e.target.value })}
                     />
 
                     <label htmlFor="lastname">Lastname</label>
@@ -55,7 +64,7 @@ function Edit({userId}) {
                       type="text"
                       name="lastname"
                       value={user&& user.lastname}
-                      onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                      onChange={(e) => setUser({ ...user, lastname: e.target.value })}
                     />
                     <label htmlFor="phoneNumber">Phone Number</label>
                     <MDBInput
@@ -63,7 +72,7 @@ function Edit({userId}) {
                       type="text"
                       name="phoneNumber"
                       value={user&& user.phoneNumber}
-                      onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                      onChange={(e) => setUser({ ...user, phoneNumber: e.target.value })}
                     />
 
                     <label htmlFor="city">City</label>
@@ -72,7 +81,7 @@ function Edit({userId}) {
                       type="text"
                       name="city"
                       value={user&& user.city}
-                      onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                      onChange={(e) => setUser({ ...user, city: e.target.value })}
                     />
 
                     <label htmlFor="address">Address</label>
@@ -80,11 +89,11 @@ function Edit({userId}) {
                       id="address"
                       type="text"
                       name="address"
-                      value={user&& user.address}
-                      onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                      value={user&& user.adress}
+                      onChange={(e) => setUser({ ...user, adress: e.target.value })}
                     />
 
-                    <MDBBtn type="submit">Update Profile</MDBBtn>
+                    <MDBBtn type="submit" submit='true' >Update Profile</MDBBtn>
                   </form>
                 </div>
               </MDBCardBody>
