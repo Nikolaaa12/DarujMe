@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Models{
 
-    public class Reports:IEntity{
+    public class Report:IEntity{
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -14,7 +14,7 @@ namespace Models{
         public string? IdProduct { get; set; }
         public string? IdUser { get; set; }
 
-        public Reports()
+        public Report()
         {
             
         }
