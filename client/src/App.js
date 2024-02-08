@@ -67,7 +67,7 @@ function App() {
           <Route path='/pages/addProduct' element={<AddProduct/>}></Route>
           <Route path='/pages/products' element={<Products/>}></Route>
           <Route path='/pages/myproducts' element={<MyProducts/>}></Route>
-          <Route path='/pages/editprofile' element={<EditProfile/>}></Route>
+          <Route path='pages/editprofile' element={<EditProfile userId={userId}/>}></Route>
         </Routes>
       </BrowserRouter>
       <div>{userId}</div>
