@@ -88,7 +88,7 @@ function Products() {
       </div>
       <div className='products-wrapper'>
         {filteredProducts.map((product, index) => (
-          <Product key={index} product={product} />
+          <Product showButton={true} key={index} product={product} />
         ))}
       </div>
     </div>

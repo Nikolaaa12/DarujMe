@@ -1,0 +1,12 @@
+.myProducts{
+    width: 100vw;
+    background-image: linear-gradient(to right, rgb(0, 0, 60), rgba(26, 159, 195, 0.6), rgb(0, 0, 60));
+    height: 100vh;
+}
+
+.products-wrapper{
+    padding: 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Automatski rasporedi proizvode u redove sa minimalno 300px širine */
+    grid-gap: 20px;
+  }
