@@ -5,7 +5,7 @@ import axios from 'axios';
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Product({product, showButton, userId}){
+function Product({product, showButton, userId, refreshProducts}){
 
   const [data, setData] = useState({
     ownerId:'',
@@ -44,7 +44,17 @@ function Product({product, showButton, userId}){
           autoClose: 3000,
         });
         product.available=false;
+        refreshProducts();
       })
+  }
+
+  function isAvailable(){
+    if (product.available===true){
+      return(<p style={{color:'green'}}>Available</p>)
+    }
+    else{
+      return(<p style={{color:'red'}}>Reserved</p>)
+    }
   }
 
   return (
@@ -53,6 +63,7 @@ function Product({product, showButton, userId}){
       <div className="product-content">
         <h2>{product.name}</h2>
         <h2>{product.description}</h2>
+        {isAvailable()}
         {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Preuzmi</button>}
       </div>
     </div>

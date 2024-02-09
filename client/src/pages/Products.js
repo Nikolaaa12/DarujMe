@@ -74,8 +74,16 @@ function Products({userId}) {
     })
   })
 
+  const refreshProducts = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5238/api/Product/GetAllProducts`);
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
   return (
-    <form>
       <div className='products'>
         <br />
         <div className='tipFilterBar'>
@@ -89,14 +97,13 @@ function Products({userId}) {
         </div>
         <div className='products-wrapper'>
           {filteredProducts
-            .filter(product => product.available === true) // Filter products where available is true
+            .filter(product => product.available === true && product.ownerId !== userId) // Filter products where available is true
             .map((product, index) => (
-              <Product showButton={true} key={index} product={product} userId={userId}/>
+              <Product showButton={true} key={index} product={product} userId={userId} refreshProducts={refreshProducts} />
             ))
           }
         </div>
       </div>
-    </form>
   );
 }
 

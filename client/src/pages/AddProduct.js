@@ -4,11 +4,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 
-function AddProduct() {
+function AddProduct({userId}) {
 
   const [productTypes, setProductTypes] = useState([]);
   const [data, setData] = useState({
     name:'',
+    ownerId:'',
     description:'',
     productTypeId:'1'
   });
@@ -29,6 +30,7 @@ function AddProduct() {
 
   const handleInputChange = (e) => {
     var newdata = { ...data };
+        newdata.ownerId=userId;
         newdata[e.target.id] = e.target.value; // Use square brackets for assignment
         setData(newdata);
         console.log(newdata);
