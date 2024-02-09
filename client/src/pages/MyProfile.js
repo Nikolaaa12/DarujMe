@@ -2,9 +2,11 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 import '../styles/MyProfile.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Product from '../components/Product';
 function MyProfile({userId}) {
 
     const [user, setUser] = useState(null);
+    const [products,setPrducts]= useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -15,6 +17,7 @@ function MyProfile({userId}) {
               setUser(null);
             } else {
               setUser(response.data);
+
             }
           } catch (error) {
             console.error('Error fetching user:', error);
@@ -22,6 +25,25 @@ function MyProfile({userId}) {
         };
         fetchUser();
     }, [userId]);
+
+
+useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`); // Adjust the URL according to your backend route
+        
+        if (!response.data) {
+          setPrducts(null);
+        } else {
+          setPrducts(response.data);
+
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+    fetchProducts();
+}, [products]);
 
     return (
         <div className="gradient-custom-2" style={{ backgroundImage: 'linear-gradient(to top, rgba(25, 25, 112, 1), rgba(0, 150, 255, 0.6), rgba(25, 25, 112, 1))' }}>
@@ -59,28 +81,17 @@ function MyProfile({userId}) {
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <MDBCardText className="lead fw-normal mb-0">Recently added</MDBCardText>
+                                    <MDBCardText className="lead fw-normal mb-0">Products added</MDBCardText>
                                 </div>
-                                <MDBRow>
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className="g-2">
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                </MDBRow>
+                                <MDBCardBody className="text-black p-4">
+                                <div className="row" >
+                                {products && products.map(product => (
+                                 <div key={product.id} className="col-lg-4 mb-3">
+                                  <Product product={product} showButton={false} showButton2={true} />
+                                    </div>
+                                  ))}
+                                 </div>
+                                </MDBCardBody>
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>
