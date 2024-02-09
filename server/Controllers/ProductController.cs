@@ -17,10 +17,12 @@ namespace Controllers
     {
 
         private IProductService _service;
+        private IReservationService _reservationService;
 
         public ProductController(MongoDbContext _mongoDBContext)
         {
             this._service = new ProductService(_mongoDBContext);
+            this._reservationService=new ReservationService(_mongoDBContext);
         }
 
         [HttpGet]
@@ -48,9 +50,11 @@ namespace Controllers
         [Route("DeleteProduct")]
         public async Task<IActionResult> DeleteProduct(String? id)
         {
+            var reservation = await _reservationService.Repository.GetReservationByProductId(id);
             try
             {
                 await _service.Repository.DeleteProduct(id);
+                await _reservationService.Repository.DeleteReservation(reservation.Id);
                 return Ok();
             }
             catch (Exception e)

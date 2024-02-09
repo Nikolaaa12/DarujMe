@@ -99,7 +99,7 @@ function Products({userId}) {
           {filteredProducts
             .filter(product => product.available === true && product.ownerId !== userId) // Filter products where available is true
             .map((product, index) => (
-              <Product showButton={true} key={index} product={product} userId={userId} refreshProducts={refreshProducts} />
+              <Product showButton2={false} showButton={true} key={index} product={product} userId={userId} refreshProducts={refreshProducts} />
             ))
           }
         </div>

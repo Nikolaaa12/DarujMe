@@ -46,7 +46,7 @@ function MyProducts({userId}) {
     <div className='myProducts'>
       <div className='products-wrapper'>
       {products.map(product=>(
-        <Product product={product} showButton={false}/>
+        <Product product={product} showButton={false} showButton2={true}/>
       ))}
       </div>
       </div>

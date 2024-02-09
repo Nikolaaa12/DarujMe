@@ -41,5 +41,10 @@ namespace Repository
             await this.Add<Reservation>(reservation);
             return reservation;
         }
+         public async Task<Reservation> GetReservationByProductId(string? id)
+        {
+            var reservation = await this.Find<Reservation>(a=>a.ProductId==id);
+            return reservation;
+        }
     }
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Product({product, showButton, userId, refreshProducts}){
+function Product({product, showButton, userId, refreshProducts,showButton2, products, setProducts}){
 
   const [data, setData] = useState({
     ownerId:'',
@@ -57,6 +57,42 @@ function Product({product, showButton, userId, refreshProducts}){
     }
   }
 
+  function handleDelete() {
+    const productId = product.id;
+
+    const isConfirmed = window.confirm('Da li ste sigurni da želite da obrišete ovaj proizvod?');
+
+    if (!isConfirmed) {
+      return;
+    }
+
+    axios
+      .delete(`http://localhost:5238/api/Product/DeleteProduct?id=${productId}`, {
+        headers: {
+          'accept': '*/*',
+        },
+      })
+      .then((res) => {
+        toast.success('Proizvod uspešno obrisan!', {
+          className: 'custom-toast',
+          bodyClassName: 'custom-toast-body',
+          autoClose: 3000,
+        });
+
+        console.log('Proizvod obrisan:', productId);
+        window.location.reload();
+      })
+      .catch((error) => {
+        toast.error('Greška pri brisanju proizvoda. Molimo pokušajte ponovo.', {
+          className: 'custom-toast',
+          bodyClassName: 'custom-toast-body',
+          autoClose: 3000,
+        });
+
+        console.error('Greška pri brisanju proizvoda:', error);
+      });
+  }
+
   return (
     <div className='product-card'>
       <img src={image} alt="Product" />
@@ -65,6 +101,7 @@ function Product({product, showButton, userId, refreshProducts}){
         <h2>{product.description}</h2>
         {isAvailable()}
         {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Preuzmi</button>}
+        {showButton2 && <button type="submit" onClick={handleDelete} className="download-button">Obrisi</button>}
       </div>
     </div>
   );
