@@ -1,14 +1,16 @@
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Navbar.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useLocation } from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 
-function CustomNavbar() {
+
+function CustomNavbar({userId}) {
     var navigate = useNavigate();
     const logout = () => {
         fetch('http://localhost:5238/api/User/Logout', {
@@ -47,6 +49,26 @@ function CustomNavbar() {
             console.error('Logout error:', error);
           });
       };
+
+      const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+          try {
+            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+            
+            if (!response.data) {
+              setUser(null);
+            } else {
+              setUser(response.data);
+            }
+          } catch (error) {
+            console.error('Error fetching user:', error);
+          }
+        };
+        fetchUser();
+    }, [userId]);
+
     return (
         <>
             <Navbar id='myNavbar' fixed="top" collapseOnSelect expand="lg" bg="light" data-bs-theme="light">
@@ -55,12 +77,13 @@ function CustomNavbar() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/pages/reports">Reports</Nav.Link>
+                            {user && user.admin && (
+                            <><Nav.Link href="/pages/reports">Reports</Nav.Link>
                             <NavDropdown title="Delete" id="collapsible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">User</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.2">Advertisement</NavDropdown.Item>
-                            </NavDropdown>
+                            </NavDropdown></>)}
                         </Nav>
 
                         <Nav className="me-auto">
@@ -70,7 +93,8 @@ function CustomNavbar() {
                         </Nav>
                         
                         <Nav>
-                            <Nav.Link href="/pages/SignIn"><button className='navbarBtn'>Sign in</button></Nav.Link>
+                          {userId ==-1 &&(
+                            <Nav.Link href="/pages/SignIn"><button className='navbarBtn'>Sign in</button></Nav.Link>)}
                             <NavDropdown style={{display: 'flex', alignItems: 'center'}}  title="Profile" id="collapsible-nav-dropdown">
                                 <NavDropdown.Item href="/pages/myprofile">MyProfile</NavDropdown.Item>
                                 <NavDropdown.Item href="/pages/myproducts">MyProducts</NavDropdown.Item>

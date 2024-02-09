@@ -3,9 +3,10 @@ import '../styles/Products.css';
 import Product from '../components/Product';
 import axios from 'axios';
 
-function Products() {
+function Products({userId}) {
 
   const [productTypes, setProductTypes] = useState([]);
+  
 
   useEffect(() => {
     const fetchProductTypes = async () => {
@@ -73,25 +74,29 @@ function Products() {
     })
   })
 
-
   return (
-    <div className='products'>
-      <br />
-      <div className='tipFilterBar'>
-        {productTypes.map(type => (
-          <button className='tipDugme' onClick={() => handleTypeChange(type.name)}>{type.name}</button>
-        ))}
-        <button id='prikaziSve' className='tipDugme' onClick={() => handleTypeChange(null)}>Prikazi sve</button>
+    <form>
+      <div className='products'>
+        <br />
+        <div className='tipFilterBar'>
+          {productTypes.map(type => (
+            <button className='tipDugme' onClick={() => handleTypeChange(type.name)}>{type.name}</button>
+          ))}
+          <button id='prikaziSve' className='tipDugme' onClick={() => handleTypeChange(null)}>Prikazi sve</button>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
+          <input type='text' placeholder='Search by name...' onChange={handleNameChange}></input>
+        </div>
+        <div className='products-wrapper'>
+          {filteredProducts
+            .filter(product => product.available === true) // Filter products where available is true
+            .map((product, index) => (
+              <Product showButton={true} key={index} product={product} userId={userId}/>
+            ))
+          }
+        </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
-        <input type='text' placeholder='Search by name...' onChange={handleNameChange}></input>
-      </div>
-      <div className='products-wrapper'>
-        {filteredProducts.map((product, index) => (
-          <Product showButton={true} key={index} product={product} />
-        ))}
-      </div>
-    </div>
+    </form>
   );
 }
 

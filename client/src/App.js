@@ -56,7 +56,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar/>
+        <Navbar userId={userId}/>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path='/pages/about' element={<About />}></Route>
@@ -65,7 +65,7 @@ function App() {
           <Route path='/pages/myprofile' element={<MyProfile userId={userId}/>}></Route>
           <Route path='/pages/reports' element={<Reports/>}></Route>
           <Route path='/pages/addProduct' element={<AddProduct userId={userId}/>}></Route>
-          <Route path='/pages/products' element={<Products/>}></Route>
+          <Route path='/pages/products' element={<Products userId={userId}/>}></Route>
           <Route path='/pages/myproducts' element={<MyProducts userId={userId}/>}></Route>
           <Route path='/pages/editprofile' element={<Edit userId={userId}/>}></Route>
         </Routes>
