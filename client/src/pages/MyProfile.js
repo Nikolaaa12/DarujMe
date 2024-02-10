@@ -3,8 +3,10 @@ import '../styles/MyProfile.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import Product from '../components/Product';
-function MyProfile({userId}) {
+import { useParams } from 'react-router-dom';
+function MyProfile() {
 
+    const {userId} = useParams();
     const [user, setUser] = useState(null);
     const [products,setPrducts]= useState(null);
 

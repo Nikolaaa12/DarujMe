@@ -96,7 +96,7 @@ function CustomNavbar({userId}) {
                           {userId ==-1 &&(
                             <Nav.Link href="/pages/SignIn"><button className='navbarBtn'>Sign in</button></Nav.Link>)}
                             <NavDropdown style={{display: 'flex', alignItems: 'center'}}  title="Profile" id="collapsible-nav-dropdown">
-                                <NavDropdown.Item href="/pages/myprofile">MyProfile</NavDropdown.Item>
+                                <NavDropdown.Item href={`/pages/myprofile/${userId}`}>MyProfile</NavDropdown.Item>
                                 <NavDropdown.Item href="/pages/myproducts">MyProducts</NavDropdown.Item>
                                 <NavDropdown.Item href="/pages/editprofile">Edit profile</NavDropdown.Item>
                                 <NavDropdown.Divider />

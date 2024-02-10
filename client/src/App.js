@@ -66,7 +66,7 @@ function App() {
             <Route path='/pages/about' element={<About />}></Route>
             <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
             <Route path='/pages/register' element={<Register/>}></Route>
-            <Route path='/pages/myprofile' element={<MyProfile userId={userId}/>}></Route>
+            <Route path='/pages/myprofile/:userId' element={<MyProfile />}></Route>
             <Route path='/pages/reports' element={<Reports/>}></Route>
             <Route path='/pages/addProduct' element={<AddProduct userId={userId}/>}></Route>
             <Route path='/pages/products' element={<Products userId={userId}/>}></Route>
