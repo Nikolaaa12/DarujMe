@@ -26,7 +26,7 @@ namespace Models
         {
             
         }
-        public User(string? name,string? lastname,string? username,string? email,string? password,string? city,string? adress,string? phoneNumber)
+        public User(string? name,string? lastname,string? username,string? email,string? password,  string? city,string? adress,string? phoneNumber)
         {
             this.Name=name;
             this.Lastname=lastname;

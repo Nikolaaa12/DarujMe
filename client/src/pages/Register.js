@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import '../styles/Register.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -31,14 +31,49 @@ function Register() {
     adress: '',
   });
 
+  const [profilePicture, setProfilePictureFile] = useState(null);
+  const [profilePicturePreview, setProfilePicturePreview] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setProfilePictureFile(file || null);
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setProfilePicturePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        setProfilePicturePreview(null);
+    }
+};
+
+const clearProfilePicture = () => {
+  setProfilePictureFile(null);
+  setProfilePicturePreview(null);
+};
+
   const navigate = useNavigate();
   const url = 'http://localhost:5238/api/User/Register';
 
   const submit = (e) => {
     e.preventDefault();
-    Axios.post(url, {
-      ...data,
-    })
+    
+    const formData = new FormData();
+    formData.append('profilePicture', profilePicture);
+    formData.append('name', data.name);
+    formData.append('lastname', data.lastname);
+    formData.append('username', data.username);
+    formData.append('email', data.email);
+    formData.append('city', data.city);
+    formData.append('password', data.password);
+    formData.append('repeatedPassword', data.repeatedPassword);
+    formData.append('phoneNumber', data.phoneNumber);
+    formData.append('adress', data.adress);
+
+    Axios.post(url, formData)
       .then((res) => {
         console.log(res.data);
         navigate('/pages/SignIn');
@@ -51,6 +86,24 @@ function Register() {
         });
       });
   };
+
+  // const submit = (e) => {
+  //   e.preventDefault();
+  //   Axios.post(url, {
+  //     ...data,
+  //   })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       navigate('/pages/SignIn');
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error.response.data, {
+  //         className: 'custom-toast',
+  //         bodyClassName: 'custom-toast-body',
+  //         autoClose: 3000,
+  //       });
+  //     });
+  // };
   const handleInputChange = (e) => {
 
     setData({ ...data, [e.target.id]: e.target.value });
@@ -72,6 +125,16 @@ function Register() {
               <MDBCol md="6" className="position-relative">
                 <MDBCard style={{ backgroundColor: 'transparent', border: '2px solid rgba(255,255,255,0.3)' }} className="my-5 bg-glass">
                   <MDBCardBody className="p-5">
+                    <div className="register-image-div">
+                      {profilePicturePreview ? (
+                        <img src={profilePicturePreview} alt="Profile Preview" className="profile-preview" onClick={clearProfilePicture}/>) : 
+                        (<>
+                            <label htmlFor="profile-pictur" className="profile-picture-label"><i className="bi bi-camera-fill"></i></label>
+                            <input type="file" id="profile-picture" onChange={handleFileChange} accept="image/*" className="profile-picture-input" ref={fileInputRef}/>
+                          </>
+                        )
+                      }
+                    </div>
                     <MDBRow>
                       <MDBCol col="6">
                         <MDBInput onChange={handleInputChange} id="name" value={data.name} wrapperClass="mb-4" placeholder='First name' type="text" required />

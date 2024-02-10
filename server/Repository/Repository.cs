@@ -48,12 +48,12 @@ namespace Repository
             return a;
         }
        public async Task<IQueryable<T>> FindMore<T>(Expression<Func<T, bool>> predicate)
-{
-    var collection = _context._database.GetCollection<T>(typeof(T).Name);
-    var cursor = await collection.FindAsync(predicate);
-    var results = await cursor.ToListAsync(); // Convert cursor to list
-    return results.AsQueryable(); // Convert list to IQueryable
-}
+       {
+            var collection = _context._database.GetCollection<T>(typeof(T).Name);
+            var cursor = await collection.FindAsync(predicate);
+            var results = await cursor.ToListAsync(); // Convert cursor to list
+            return results.AsQueryable(); // Convert list to IQueryable
+       }
 
 
         public async Task Add<T>(T obj)

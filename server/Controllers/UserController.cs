@@ -66,11 +66,11 @@ namespace Controllers
         }*/
          [Route("Register")]
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] UserRegisterDTO user)
+        public async Task<IActionResult> Register([FromForm] UserRegisterDTO user, [FromForm] IFormFile profilePicture)
         {
             try
             {
-                var result = await this._service.Register(user);
+                var result = await this._service.Register(user, profilePicture);
                 return Created("success", result);
             } 
             catch (Exception e)

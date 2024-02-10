@@ -28,7 +28,7 @@ namespace DTOs
         public string? City { get; set; }
         public string? Adress { get; set; }
         public string? PhoneNumber { get; set; }
-        
+
     }
 
     public class UserUpdateDTO

@@ -16,6 +16,8 @@ import Edit from './pages/EditProfile';
 
 function App() {
   const [userId, setUserId] = useState(-1);
+  const [user, setUser] = useState(null);
+  const [profilePicture, setProfilePicture] = useState(null);
   //const Navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +37,19 @@ function App() {
 
           const content = await response.json();
           setUserId(content.id);
+          setUser(content);
+          console.log(content);
+          console.log(content.profilePicture)
+          setProfilePicture(content.profilePicture)
+        //   if (content.profilePicture) {
+        //     const base64String = btoa(
+        //         new Uint8Array(content.profilePicture)
+        //             .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        //     );
+        //     console.log(base64String);
+        //     setProfilePicture(`data:image/jpeg;base64,${base64String}`);
+        // }
+          
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -54,24 +69,26 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="App">
       <BrowserRouter>
         <Navbar userId={userId}/>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path='/pages/about' element={<About />}></Route>
-          <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
-          <Route path='/pages/register' element={<Register/>}></Route>
-          <Route path='/pages/myprofile' element={<MyProfile userId={userId}/>}></Route>
-          <Route path='/pages/reports' element={<Reports/>}></Route>
-          <Route path='/pages/addProduct' element={<AddProduct userId={userId}/>}></Route>
-          <Route path='/pages/products' element={<Products userId={userId}/>}></Route>
-          <Route path='/pages/myproducts' element={<MyProducts userId={userId}/>}></Route>
-          <Route path='/pages/editprofile' element={<Edit userId={userId}/>}></Route>
-        </Routes>
+        <main className='main'>
+          <Routes>
+            <Route path="/" element={<Home user={profilePicture}/>}></Route>
+            <Route path='/pages/about' element={<About />}></Route>
+            <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
+            <Route path='/pages/register' element={<Register/>}></Route>
+            <Route path='/pages/myprofile' element={<MyProfile userId={userId}/>}></Route>
+            <Route path='/pages/reports' element={<Reports/>}></Route>
+            <Route path='/pages/addProduct' element={<AddProduct userId={userId}/>}></Route>
+            <Route path='/pages/products' element={<Products userId={userId}/>}></Route>
+            <Route path='/pages/myproducts' element={<MyProducts userId={userId}/>}></Route>
+            <Route path='/pages/editprofile' element={<Edit userId={userId}/>}></Route>
+          </Routes>
+        </main>
+        
       </BrowserRouter>
-      <div>{userId}</div>
-    </>
+    </div>
   );
 }
 

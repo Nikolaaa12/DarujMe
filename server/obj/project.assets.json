@@ -1459,23 +1459,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mihaj\\.nuget\\packages\\": {},
+    "C:\\Users\\predr\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj",
+      "projectUniqueName": "C:\\VII semestar\\Napredne baze podataka\\DarujMe\\server\\server.csproj",
       "projectName": "server",
-      "projectPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\server.csproj",
-      "packagesPath": "C:\\Users\\mihaj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mihaj\\OneDrive\\Radna površina\\DarujMe\\DarujMe\\server\\obj\\",
+      "projectPath": "C:\\VII semestar\\Napredne baze podataka\\DarujMe\\server\\server.csproj",
+      "packagesPath": "C:\\Users\\predr\\.nuget\\packages\\",
+      "outputPath": "C:\\VII semestar\\Napredne baze podataka\\DarujMe\\server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\mihaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\predr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1484,7 +1484,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1547,7 +1546,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   },

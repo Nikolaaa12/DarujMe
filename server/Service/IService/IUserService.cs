@@ -7,7 +7,7 @@ namespace Services.IServices
     public interface IUserService
     {
         public UserRepository Repository { get; set; }
-        Task<User> Register(UserRegisterDTO user);
+        Task<User> Register(UserRegisterDTO user, IFormFile profilePicture);
         Task<string> Login(string email, string password);
       //  Task UpdateProfile(UserUpdateDTO user);
         Task<User> GetUser(string jwt);

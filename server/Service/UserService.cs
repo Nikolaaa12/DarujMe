@@ -21,7 +21,7 @@ namespace Services
             jwtService = new JwtService();
         }
 
-        public async Task<User> Register(UserRegisterDTO user)
+        public async Task<User> Register(UserRegisterDTO user, IFormFile profilePicture)
         {
             if (user != null)
             {
@@ -41,6 +41,7 @@ namespace Services
                 {
                     throw new Exception("Password missmatch");
                 }
+
                 var userCreated = new User
                 (
                     user.Name,
@@ -52,6 +53,15 @@ namespace Services
                     user.Adress,
                     user.PhoneNumber
                 );
+
+                if (profilePicture != null)
+                {
+                    MemoryStream memoryStream = new MemoryStream();
+                    profilePicture.OpenReadStream().CopyTo(memoryStream);
+                    userCreated.ProfilePicture = Convert.ToBase64String(memoryStream.ToArray());
+                }
+
+                
 
                 return await this.Repository.Create(userCreated);
             }
