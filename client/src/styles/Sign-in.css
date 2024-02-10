@@ -1,10 +1,10 @@
 .signIn{
     display: flex;
-    width: 100vw;
+    width: 100%;
     background-image: linear-gradient(to top, rgba(25, 25, 112, 1), rgba(0, 150, 255, 0.6), rgba(25, 25, 112, 1));
     align-items: center;
     justify-content: space-evenly;
-    height: 100vh;
+    height: fit-content;
 }
 
 .signInWrapper{

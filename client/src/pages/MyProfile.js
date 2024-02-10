@@ -9,6 +9,7 @@ function MyProfile() {
 
     const {userId} = useParams();
     const [user, setUser] = useState(null);
+    const [products, setPrducts] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {

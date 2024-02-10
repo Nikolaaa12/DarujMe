@@ -119,7 +119,7 @@ const clearProfilePicture = () => {
                     </div>
                     <MDBRow>
                       <MDBCol col="6">
-                        <MDBInput onChange={handleInputChange} id="name" value={data.name} wrapperClass="mb-4" placeholder='First name' type="text" required />
+                        <MDBInput onChange={handleInputChange} id="name" value={data.name} wrapperClass="mb-4"   type="text" required />
                       </MDBCol>
                       <MDBCol col="6">
                         <MDBInput onChange={handleInputChange} id="lastname" value={data.lastname} wrapperClass="mb-4" placeholder="Last name" type="text" required />

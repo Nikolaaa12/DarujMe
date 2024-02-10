@@ -1,0 +1,120 @@
+.product-type-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.type-content{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 800px;
+    min-height: 400px;
+    height: auto;
+    background-color: #9e9d9d3d;
+    border-radius: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.product-type-title{
+    font-size: 35px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.product-type-content{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.product-type-add-type{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.type-input-add{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 3px solid black;
+    padding-bottom: 15px;
+}
+
+.input-add{
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.type-input{
+    width: 60%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.type-add{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: rgba(6, 226, 6, 0.753);
+    transition: background-color 0.3s;
+}
+
+.type-add:hover{
+    background-color: rgb(1, 212, 1);
+}
+
+
+.type-showing{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.type-showing-content{
+    width: 90%;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.type-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.type-item:hover{
+    background-color: #9e9d9d80;
+    border-radius: 10px;
+}
+
+.type-trash{
+    cursor: pointer;
+}

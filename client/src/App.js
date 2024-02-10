@@ -65,7 +65,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home userId={userId}/>}></Route>
             <Route path='/pages/about' element={<About />}></Route>
-            <Route path='/pages/ProductType' element={<ProductType />}></Route>
+            <Route path='/ProductType' element={<ProductType />}></Route>
             <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
             <Route path='/pages/register' element={<Register/>}></Route>
             <Route path='/pages/myprofile/:userId' element={<MyProfile />}></Route>

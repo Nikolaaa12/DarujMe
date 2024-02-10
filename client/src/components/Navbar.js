@@ -59,17 +59,18 @@ function CustomNavbar({userId, setUserId}) {
     useEffect(() => {
         const fetchUser = async () => {
           try {
-            //const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
+                headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
+                method: 'GET',
+                credentials: 'include',
+              }); // Adjust the URL according to your backend route
 
-            const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
-              headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
-              method: 'GET',
-              credentials: 'include',
-            });
+            // const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`);
             
             if (!response.data) {
               setUser(null);
             } else {
+              console.log(response.data)
               setUser(response.data);
             }
           } catch (error) {
@@ -88,11 +89,12 @@ function CustomNavbar({userId, setUserId}) {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             {user && user.admin && (
-                            <><Nav.Link href="/pages/reports">Reports</Nav.Link>
-                            <NavDropdown title="Delete" id="collapsible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">User</NavDropdown.Item>
+                            <>
+                            <NavDropdown title="Admin" id="collapsible-nav-dropdown">
+                                <NavDropdown.Item href="/ProductType">Product type</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.2">Advertisement</NavDropdown.Item>
+                                <NavDropdown.Item href="/pages/reports">Reported products</NavDropdown.Item>
+                                <NavDropdown.Item href="/pages/reports">Reported users</NavDropdown.Item>
                             </NavDropdown></>)}
                         </Nav>
 
