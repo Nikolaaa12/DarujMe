@@ -7,6 +7,6 @@ namespace Services.IServices
     public interface IProductService
     {
         public ProductRepository Repository { get; set; }
-        Task<Product> CreateProduct(CreateProductDTO product);
+        Task<Product> CreateProduct(CreateProductDTO product, IFormFile profilePicture);
     }
 }

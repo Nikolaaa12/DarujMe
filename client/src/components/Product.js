@@ -96,6 +96,7 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
   return (
     <div className='product-card'>
       <img src={image} alt="Product" />
+      {/* <img src={"data:image/jpeg;base64," + product.profilePicture} alt="Profile" style={{ width: '100px', height: '100px' }} /> */}
       <div className="product-content">
         <h2>{product.name}</h2>
         <h2>{product.description}</h2>

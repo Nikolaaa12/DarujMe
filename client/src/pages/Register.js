@@ -86,24 +86,6 @@ const clearProfilePicture = () => {
         });
       });
   };
-
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   Axios.post(url, {
-  //     ...data,
-  //   })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       navigate('/pages/SignIn');
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.response.data, {
-  //         className: 'custom-toast',
-  //         bodyClassName: 'custom-toast-body',
-  //         autoClose: 3000,
-  //       });
-  //     });
-  // };
   const handleInputChange = (e) => {
 
     setData({ ...data, [e.target.id]: e.target.value });

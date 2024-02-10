@@ -64,10 +64,17 @@ namespace Controllers
         }
         [HttpPost]
         [Route("CreateProduct")]
-        public async Task<IActionResult> CreateProduct([FromBody] CreateProductDTO product)
+        public async Task<IActionResult> CreateProduct([FromForm] CreateProductDTO product, [FromForm] IFormFile profilePicture)
         {
-            var a = await _service.CreateProduct(product);
-            return Ok(a);
+            try
+            {
+                var a = await _service.CreateProduct(product, profilePicture);
+                return Ok(a);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
         [HttpGet]
         [Route("GetProductsByOwnerId")]

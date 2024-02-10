@@ -17,7 +17,6 @@ import Edit from './pages/EditProfile';
 function App() {
   const [userId, setUserId] = useState(-1);
   const [user, setUser] = useState(null);
-  const [profilePicture, setProfilePicture] = useState(null);
   //const Navigate = useNavigate();
 
   useEffect(() => {
@@ -38,17 +37,6 @@ function App() {
           const content = await response.json();
           setUserId(content.id);
           setUser(content);
-          console.log(content);
-          console.log(content.profilePicture)
-          setProfilePicture(content.profilePicture)
-        //   if (content.profilePicture) {
-        //     const base64String = btoa(
-        //         new Uint8Array(content.profilePicture)
-        //             .reduce((data, byte) => data + String.fromCharCode(byte), '')
-        //     );
-        //     console.log(base64String);
-        //     setProfilePicture(`data:image/jpeg;base64,${base64String}`);
-        // }
           
         } catch (error) {
           console.error('Error fetching user data:', error);
@@ -74,7 +62,7 @@ function App() {
         <Navbar userId={userId}/>
         <main className='main'>
           <Routes>
-            <Route path="/" element={<Home user={profilePicture}/>}></Route>
+            <Route path="/" element={<Home user={user}/>}></Route>
             <Route path='/pages/about' element={<About />}></Route>
             <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
             <Route path='/pages/register' element={<Register/>}></Route>

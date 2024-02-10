@@ -8,7 +8,7 @@ function Home({user}){
         <div className="home">
             <h1 className='title'>DarujMe</h1>
             {user && (
-                <img src={"data:image/jpeg;base64," + user} alt="Profile" style={{ width: '100px', height: '100px' }} />
+                <img src={"data:image/jpeg;base64," + user.profilePicture} alt="Profile" style={{ width: '100px', height: '100px' }} />
             )}
         </div>
     )
