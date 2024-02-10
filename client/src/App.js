@@ -14,6 +14,7 @@ import Products from './pages/Products';
 import MyProducts from './pages/MyProducts';
 import Edit from './pages/EditProfile';
 import ProductType from './pages/ProductType';
+import MyReservations from './pages/MyReservations';
 
 function App() {
   const [userId, setUserId] = useState(-1);
@@ -74,6 +75,7 @@ function App() {
             <Route path='/pages/products' element={<Products userId={userId}/>}></Route>
             <Route path='/pages/myproducts' element={<MyProducts userId={userId}/>}></Route>
             <Route path='/pages/editprofile' element={<Edit userId={userId}/>}></Route>
+            <Route path='/pages/myreservations' element={<MyReservations userId={userId}/>}></Route>
           </Routes>
         </main>
         

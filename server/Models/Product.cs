@@ -18,6 +18,8 @@ namespace Models{
         public string? OwnerId { get; set; }
         public Boolean Available { get; set; }
 
+        public Boolean isSent {get; set;}
+
         public Product()
         {
             
@@ -31,6 +33,7 @@ namespace Models{
             this.OwnerId = ownerid;
             this.TypeofProduct = null;
             this.Available = true;
+            this.isSent = false;
         }
 
     }

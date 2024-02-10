@@ -8,5 +8,7 @@ namespace Services.IServices
     {
         public ProductRepository Repository { get; set; }
         Task<Product> CreateProduct(CreateProductDTO product, IFormFile profilePicture);
+
+        Task<Product> ChangeState(ChangeStateDTO cs);
     }
 }

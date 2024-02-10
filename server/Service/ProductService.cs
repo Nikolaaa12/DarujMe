@@ -12,8 +12,8 @@ namespace Services
     {
         public ProductRepository Repository { get; set; }
         public ProductTypeService TypeService { get; set; }
-        public UserService userService{ get; set; }
-    
+        public UserService userService { get; set; }
+
 
 
         public ProductService(MongoDbContext _db)
@@ -24,9 +24,9 @@ namespace Services
         }
         public async Task<Product> CreateProduct(CreateProductDTO product, IFormFile profilePicture)
         {
-            Product product1 = new Product(product.Name,product.Description,product.ProfilePicture,product.ProductTypeId,product.OwnerId);
+            Product product1 = new Product(product.Name, product.Description, product.ProfilePicture, product.ProductTypeId, product.OwnerId);
             var type = await TypeService.Repository.GetTypeById(product.ProductTypeId);
-            product1.TypeofProduct=type;
+            product1.TypeofProduct = type;
 
             if (profilePicture != null)
             {
@@ -37,6 +37,27 @@ namespace Services
 
             var pro = await this.Repository.Create(product1);
             return pro;
+        }
+
+        public async Task<Product> ChangeState(ChangeStateDTO productDTO)
+        {
+            if (productDTO != null)
+            {
+                var productFound = await this.Repository.GetProductById(productDTO.Id);
+                if (productFound != null)
+                {
+                    productFound.isSent = true;
+                    return await this.Repository.UpdateProduct(productFound);
+                }
+                else
+                {
+                    throw new Exception("Product with this id doesn't exist");
+                }
+            }
+            else
+            {
+                throw new Exception("Invalid product data provided");
+            }
         }
     }
 

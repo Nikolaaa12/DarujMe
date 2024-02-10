@@ -84,6 +84,20 @@ namespace Controllers
             return Ok(a);
         }
 
+        [HttpPut]
+        [Route("ChangeState")]
+        public async Task<IActionResult> ChangeState([FromBody] ChangeStateDTO cs){
+            try
+            {
+                var product = await this._service.ChangeState(cs);
+
+                return Ok(product);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }

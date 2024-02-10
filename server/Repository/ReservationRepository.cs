@@ -31,6 +31,12 @@ namespace Repository
             return reservations;
         }
 
+        public async Task<IQueryable<Reservation>> GetReservationsByCustomerId(string? id)
+        {
+            var reservations = await this.FindMore<Reservation>((products)=>products.CustomerId==id);
+            return reservations;
+        }
+
         public async Task DeleteReservation(string? Id)
         {
              await this.Delete<Reservation>(Id);
