@@ -2,6 +2,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBBtn, MDBInput } 
 import '../styles/EditProfile.css';
 import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie'
 
 function Edit({userId}) {
 
@@ -19,7 +20,11 @@ function Edit({userId}) {
       try {
         if(userId !== -1)
         {
-          const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+          const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
+              headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
+              method: 'GET',
+              credentials: 'include',
+            }); // Adjust the URL according to your backend route
         
           if (!response.data) {
             setUser(null);
@@ -55,7 +60,8 @@ function submit(e) {
   // Make a POST request to the server with FormData
   axios.put(url, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data' // Set content type to multipart/form-data
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'Bearer ' + Cookies.get('jwt') // Set content type to multipart/form-data
     }
   })
 
