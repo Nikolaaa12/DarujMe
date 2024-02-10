@@ -116,11 +116,11 @@ namespace Controllers
         }
         [Route("EditUser")]
         [HttpPut]
-        public async Task<IActionResult> EditUser([FromBody] UserUpdateDTO us)
+        public async Task<IActionResult> EditUser([FromForm] UserUpdateDTO us, [FromForm] IFormFile profilePicture)
         {
             try
             {
-                var user = await this._service.UpdateUser(us);
+                var user = await this._service.UpdateUser(us, profilePicture);
 
                 return Ok(user);
             }

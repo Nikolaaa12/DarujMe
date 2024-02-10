@@ -1,6 +1,6 @@
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import '../styles/EditProfile.css';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 
 function Edit({userId}) {
@@ -9,16 +9,27 @@ function Edit({userId}) {
 
   const [user, setUser] = useState(null);
 
+  const [changeProfilePicture, setChangeProfilePicture] = useState(false);
+  const [profilePicturePreview, setProfilePicturePreview] = useState(null);
+  const [profilePicture, setProfilePictureFile] = useState(null);
+  const fileInputRef = useRef(null);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+        if(userId !== -1)
+        {
+          const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
         
-        if (!response.data) {
-          setUser(null);
-        } else {
-          setUser(response.data);
+          if (!response.data) {
+            setUser(null);
+          } else {
+            setUser(response.data);
+            if(response.data.profilePicture)
+              setProfilePicturePreview("data:image/jpeg;base64," +response.data.profilePicture);
+          }
         }
+        
       } catch (error) {
         console.error('Error fetching user:', error);
       }
@@ -28,14 +39,57 @@ function Edit({userId}) {
 
 function submit(e) {
   e.preventDefault();
-  axios.put(url, {
-    id: user.id,
-    name: user.name,
-    lastname: user.lastname,
-    phoneNumber: user.phoneNumber,
-    adress: user.adress,
-    city: user.city
+
+  const formData = new FormData();
+  formData.append('id', user.id);
+  formData.append('name', user.name);
+  formData.append('lastname', user.lastname);
+  formData.append('phoneNumber', user.phoneNumber);
+  formData.append('adress', user.adress);
+  formData.append('city', user.city);
+  // Append the profile picture if it's not null
+  if (profilePicture) {
+    formData.append('profilePicture', profilePicture);
+  }
+  
+  // Make a POST request to the server with FormData
+  axios.put(url, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data' // Set content type to multipart/form-data
+    }
   })
+
+  // axios.put(url, {
+  //   id: user.id,
+  //   name: user.name,
+  //   lastname: user.lastname,
+  //   phoneNumber: user.phoneNumber,
+  //   adress: user.adress,
+  //   city: user.city
+  // })
+}
+
+const handleFileChange = (e) => {
+  const file = e.target.files?.[0];
+  setProfilePictureFile(file || null);
+
+  if (file) {
+      setChangeProfilePicture(true);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+          setProfilePicturePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+  } else {
+      setProfilePicturePreview(null);
+      setChangeProfilePicture(false);
+  }
+};
+
+const clearProfilePicture = () => {
+  setProfilePictureFile(null);
+  setProfilePicturePreview(null);
+  setChangeProfilePicture(true);
 }
 
   
@@ -49,6 +103,16 @@ function submit(e) {
                 <div className="mb-5 form-container">
                   <h2 className="h2-responsive text-center mb-4">Edit Profile</h2>
                   <form onSubmit={submit}>
+                  <div className="register-image-div">
+                      {profilePicturePreview ? (
+                        <img src={profilePicturePreview} alt="Profile Preview" className="profile-preview" onClick={clearProfilePicture}/>) : 
+                        (<>
+                            <label htmlFor="profile-pictur" className="profile-picture-label"><i className="bi bi-camera-fill"></i></label>
+                            <input type="file" id="profile-picture" onChange={handleFileChange} accept="image/*" className="profile-picture-input" ref={fileInputRef}/>
+                          </>
+                        )
+                      }
+                    </div>
                     <label htmlFor="name">Name</label>
                     <MDBInput
                       id="name"

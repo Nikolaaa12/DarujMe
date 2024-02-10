@@ -6,6 +6,7 @@ using Helpers;
 using Context;
 using BCrypt.Net;
 using Services;
+using System.IO;
 
 namespace Services
 {
@@ -98,34 +99,57 @@ namespace Services
             return jwt;
         }
         
-                public async Task<User> UpdateUser(UserUpdateDTO user)
+        public async Task<User> UpdateUser(UserUpdateDTO user, IFormFile profilePicture)
+        {
+            if (user != null)
+            {
+                var userFound = await this.Repository.GetUserById(user.Id);
+
+                if(userFound.ProfilePicture != null)
                 {
-                    if (user != null)
+                    if (profilePicture != null)
                     {
-                        var userFound = await this.Repository.GetUserById(user.Id);
-                        userFound.Name = user.Name;
-                        userFound.Lastname = user.LastName;
-                        userFound.City =user.City;
-                        userFound.Adress=user.Adress;
-                        userFound.PhoneNumber=user.PhoneNumber;
-                        return await this.Repository.UpdateUser(userFound);
+                        MemoryStream memoryStream = new MemoryStream();
+                        profilePicture.OpenReadStream().CopyTo(memoryStream);
+                        userFound.ProfilePicture = Convert.ToBase64String(memoryStream.ToArray());
                     }
                     else
                     {
-                        throw new Exception("User With that Id doesnt exist");
+                        userFound.ProfilePicture = "";
                     }
                 }
-
-                public async Task<User> GetUser(string jwt)
+                else
                 {
-                    var token = jwtService.Verify(jwt);
-
-                    string? userId = token.Issuer;
-
-                    var user = await this.Repository.GetUserById(userId);
-
-                    return user;
+                    if (profilePicture != null)
+                    {
+                        MemoryStream memoryStream = new MemoryStream();
+                        profilePicture.OpenReadStream().CopyTo(memoryStream);
+                        userFound.ProfilePicture = Convert.ToBase64String(memoryStream.ToArray());
+                    }
                 }
+                userFound.Name = user.Name;
+                userFound.Lastname = user.LastName;
+                userFound.City =user.City;
+                userFound.Adress=user.Adress;
+                userFound.PhoneNumber=user.PhoneNumber;
+                return await this.Repository.UpdateUser(userFound);
+            }
+            else
+            {
+                throw new Exception("User With that Id doesnt exist");
+            }
+        }
+
+        public async Task<User> GetUser(string jwt)
+        {
+            var token = jwtService.Verify(jwt);
+
+            string? userId = token.Issuer;
+
+            var user = await this.Repository.GetUserById(userId);
+
+            return user;
+        }
 /*                public async Task<IQueryable<User>> GetUsersbytypeId(int Id)
                 {
 
