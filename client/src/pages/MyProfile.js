@@ -2,6 +2,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 import '../styles/MyProfile.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie'
 import Product from '../components/Product';
 import { useParams } from 'react-router-dom';
 function MyProfile() {
@@ -13,8 +14,28 @@ function MyProfile() {
     useEffect(() => {
         const fetchUser = async () => {
           try {
-            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+
+            const jwt = Cookies.get('jwt');
+
+            // Create the request headers with the Authorization header containing the JWT token
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${jwt}` // Include the JWT token in the Authorization header
+                }
+            };
+            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`, config); // Adjust the URL according to your backend route
+
+            // console.log(Cookies.get('jwt'))
+            // const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
+            //   method: 'GET',
+            //   headers: {
+            //       'Content-Type': 'application/json',
+            //       'Authorization': 'Bearer ' + Cookies.get('jwt')
+            //   },
+            //   credentials: 'include' 
+            // });
             
+            console.log(response)
             if (!response.data) {
               setUser(null);
             } else {
@@ -32,7 +53,13 @@ function MyProfile() {
 useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`); // Adjust the URL according to your backend route
+        //const response = await axios.get(`http://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`); // Adjust the URL according to your backend route
+
+        const response = await fetch(`https://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`, {
+            headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
+            method: 'GET',
+            credentials: 'include',
+        });
         
         if (!response.data) {
           setPrducts(null);

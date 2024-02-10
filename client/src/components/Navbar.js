@@ -7,10 +7,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie'
 
 
 
-function CustomNavbar({userId}) {
+function CustomNavbar({userId, setUserId}) {
     var navigate = useNavigate();
     const logout = () => {
         fetch('http://localhost:5238/api/User/Logout', {
@@ -20,9 +21,11 @@ function CustomNavbar({userId}) {
           mode: 'cors',
         })
           .then(response => {
+
             if (!response.ok) {
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            else{}
             return response.json();
           })
           .then(() => {/*
@@ -42,6 +45,7 @@ function CustomNavbar({userId}) {
             if (currentPath === '/') {
               window.location.reload();
             } else {
+              setUserId(-1);
               navigate('/');
             }
           })
@@ -55,7 +59,13 @@ function CustomNavbar({userId}) {
     useEffect(() => {
         const fetchUser = async () => {
           try {
-            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+            //const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+
+            const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
+              headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
+              method: 'GET',
+              credentials: 'include',
+            });
             
             if (!response.data) {
               setUser(null);

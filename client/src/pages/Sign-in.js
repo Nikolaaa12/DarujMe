@@ -39,7 +39,7 @@ function SignIn(props) {
         });
       } else {
         const userData = await response.json();
-        setUserId(userData.id);
+        await setUserId(userData.id);
         navigate('/');
       }
     } catch (error) {

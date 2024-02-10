@@ -13,6 +13,7 @@ import AddProduct from './pages/AddProduct';
 import Products from './pages/Products';
 import MyProducts from './pages/MyProducts';
 import Edit from './pages/EditProfile';
+import ProductType from './pages/ProductType';
 
 function App() {
   const [userId, setUserId] = useState(-1);
@@ -59,11 +60,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar userId={userId}/>
+        <Navbar userId={userId} setUserId={setUserId}/>
         <main className='main'>
           <Routes>
-            <Route path="/" element={<Home user={user}/>}></Route>
+            <Route path="/" element={<Home userId={userId}/>}></Route>
             <Route path='/pages/about' element={<About />}></Route>
+            <Route path='/pages/ProductType' element={<ProductType />}></Route>
             <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
             <Route path='/pages/register' element={<Register/>}></Route>
             <Route path='/pages/myprofile/:userId' element={<MyProfile />}></Route>

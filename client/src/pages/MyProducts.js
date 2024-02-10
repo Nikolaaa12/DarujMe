@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Product from '../components/Product';
 import '../styles/MyProducts.css';
+import Cookies from 'js-cookie'
 
 function MyProducts({userId}) {
 
@@ -11,7 +12,11 @@ function MyProducts({userId}) {
     useEffect(() => {
         const fetchUser = async () => {
           try {
-            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`); // Adjust the URL according to your backend route
+            const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
+              headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
+              method: 'GET',
+              credentials: 'include',
+            }); // Adjust the URL according to your backend route
             
             if (!response.data) {
               setUser(null);
