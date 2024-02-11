@@ -43,16 +43,6 @@ function Reports(){
 
   const handleDelete = async (report) => {
 
-    console.log(report);
-
-    // axios.delete(`http://localhost:5238/api/Product/DeleteProduct?id=${report.product.id}`, {
-    //       headers: {
-    //         'accept': '*/*',
-    //       },
-    //     }).then(
-    //       console.log("idemo"),
-    //       setReports(prevReports => prevReports.filter(t => t.id !== report.id))
-    //     )
     const response = await fetch(`http://localhost:5238/api/Product/DeleteProduct?id=${report.product.id}`, {
             method: 'DELETE',
             headers: {
@@ -61,36 +51,10 @@ function Reports(){
             },
             credentials: 'include'
         });
-        console.log(response);
-        console.log(report.product.id);
         if (response.ok) {
             setReports(prevReports => prevReports.filter(t => t.id !== report.id));
             handleCheck(report);
         } 
-
-        // axios
-        // .delete(`http://localhost:5238/api/Product/DeleteProduct?id=${productId}`, {
-        //   headers: {
-        //     'accept': '*/*',
-        //   },
-        // })
-        // .then((res) => {
-        //   toast.success('Proizvod uspešno obrisan!', {
-        //     className: 'custom-toast',
-        //     bodyClassName: 'custom-toast-body',
-        //     autoClose: 3000,
-        //   });
-  
-        //   console.log('Proizvod obrisan:', productId);
-        //   window.location.reload();
-        // })
-        // .catch((error) => {
-        //   toast.error('Greška pri brisanju proizvoda. Molimo pokušajte ponovo.', {
-        //     className: 'custom-toast',
-        //     bodyClassName: 'custom-toast-body',
-        //     autoClose: 3000,
-        //   });
-  
   };
 
     return(
