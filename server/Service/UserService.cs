@@ -13,12 +13,16 @@ namespace Services
     public class UserService : IUserService
     {
         public UserRepository Repository { get; set; }
+        public IProductService productService { get; set; }
+        public IReservationService reservationService { get; set; }
         private JwtService jwtService { get; set; }
 
 
         public UserService(MongoDbContext _db)
         {
             this.Repository = new UserRepository(_db);
+            this.productService = new ProductService(_db);
+            this.reservationService = new ReservationService(_db);
             jwtService = new JwtService();
         }
 
@@ -149,6 +153,36 @@ namespace Services
             var user = await this.Repository.GetUserById(userId);
 
             return user;
+        }
+
+        public async Task DeleteUser(string id)
+        {
+            var user = await this.Repository.GetUserById(id);
+            if(user != null)
+            {
+                var reservation = await this.reservationService.Repository.GetReservationsByOwnerId(user.Id);
+
+                if(reservation != null)
+                {
+                    foreach(var res in reservation)
+                    {
+                        await this.reservationService.DeleteReservation(res.Id);
+                    }
+                }
+
+                var products = await this.productService.Repository.GetProductsByOwnerId(user.Id);
+
+                if(products != null)
+                {
+                    foreach(var pro  in products)
+                    {
+                        await this.productService.Repository.DeleteProduct(pro.Id);
+                    }
+                }
+
+                await this.Repository.DeleteUser(id);
+
+            }
         }
 /*                public async Task<IQueryable<User>> GetUsersbytypeId(int Id)
                 {

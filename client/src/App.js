@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import MyProfile from './pages/MyProfile';
 import Reports from './pages/Reports';
+import UserReports from './pages/UserReports';
 import { useEffect } from 'react';
 import AddProduct from './pages/AddProduct';
 import Products from './pages/Products';
@@ -72,6 +73,7 @@ function App() {
             <Route path='/pages/register' element={<Register/>}></Route>
             <Route path='/pages/myprofile/:userId' element={<MyProfile />}></Route>
             <Route path='/pages/reports' element={<Reports/>}></Route>
+            <Route path='/pages/userReports' element={<UserReports/>}></Route>
             <Route path='/pages/addProduct' element={<AddProduct userId={userId}/>}></Route>
             <Route path='/pages/products' element={<Products userId={userId}/>}></Route>
             <Route path='/pages/myproducts' element={<MyProducts userId={userId}/>}></Route>

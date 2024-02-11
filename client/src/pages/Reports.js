@@ -2,6 +2,8 @@ import '../styles/Reports.css';
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import noImage from '../resources/no-image.jpg';
+
 
 function Reports(){
 
@@ -68,7 +70,7 @@ function Reports(){
                         {reports.map((report, index) => (
                             <div key={index} className='report-item'>
                               <div className='reports-img-div'>
-                                <img className='reports-img' src={"data:image/jpeg;base64," + report.product.profilePicture} alt="Profile" />
+                                <img className='reports-img' src={report.product.profilePicture ? "data:image/jpeg;base64," + report.product.profilePicture : noImage} alt="Profile" />
                               </div>
                               <div className='reports-product-name'>
                                 <label>{report.product.name}</label>

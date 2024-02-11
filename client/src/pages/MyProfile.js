@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 function MyProfile() {
 
     const {userId} = useParams();
+    const [currentUser, setCurrentUser] = useState(null);
     const [user, setUser] = useState(null);
     const [products, setPrducts] = useState(null);
     const [showReportDiv, setShowReportDiv] = useState(false);
@@ -75,25 +76,54 @@ useEffect(() => {
     fetchProducts();
 }, [products]);
 
+useEffect(() => {
+    const fetchUser = async () => {
+        const response = await fetch(`http://localhost:5238/api/User/GetUser`, {
+            headers: { 'Authorization': 'Bearer ' + Cookies.get('jwt') },
+            method: 'GET',
+            credentials: 'include',
+          }); 
+
+          var data = await response.json()
+          if (!data) {
+              setCurrentUser(null);
+          } else {
+            setCurrentUser(data);
+          }
+    };
+    fetchUser();
+}, []);
+
 const handleShowReportDiv = () => {
     setShowReportDiv(!showReportDiv);
 };
 
 const handleReportUser = async () => {
-    setShowReportDiv(false);
-
-    const response = await fetch(`https://localhost:5238/api/UserReport/CreateUserReport?id=${userId}`, {
-        headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
-        method: 'GET',
-        credentials: 'include',
-    });
     
-    if (!response.data) {
-      setPrducts(null);
-    } else {
-      setPrducts(response.data);
+    const jwt = Cookies.get('jwt');
 
+    if(!user || !currentUser){
+        return;
     }
+
+    const requestBody = JSON.stringify({
+        Description: reportUserContent,
+        ReportedUser: user,
+        ReporterUserId: currentUser.id
+    });
+
+    const response = await fetch(`http://localhost:5238/api/UserReport/CreateUserReport`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+        },
+        body: requestBody
+    });
+
+    if (response.ok) {
+        setShowReportDiv(false);
+    }  
 
 }
 

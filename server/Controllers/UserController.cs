@@ -139,5 +139,20 @@ namespace Controllers
             return Ok(new { message = "success" });
         }
 
+        [HttpDelete]
+        [Route("DeleteUser")]
+        public async Task<IActionResult> DeleteUser(String? id)
+        {
+            try
+            {
+                await this._service.DeleteUser(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

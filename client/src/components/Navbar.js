@@ -88,13 +88,14 @@ function CustomNavbar({userId, setUserId}) {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            {user && user.admin && (
+                            {/* {user && user.admin && ( */}
+                            {(
                             <>
                             <NavDropdown title="Admin" id="collapsible-nav-dropdown">
                                 <NavDropdown.Item href="/ProductType">Product type</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/pages/reports">Reported products</NavDropdown.Item>
-                                <NavDropdown.Item href="/pages/reports">Reported users</NavDropdown.Item>
+                                <NavDropdown.Item href="/pages/userReports">Reported users</NavDropdown.Item>
                             </NavDropdown></>)}
                         </Nav>
 
