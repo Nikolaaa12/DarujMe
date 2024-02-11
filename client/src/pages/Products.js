@@ -27,7 +27,9 @@ function Products({userId}) {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`http://localhost:5238/api/Product/GetAllProducts`);
-        setProducts(response.data);
+
+        var list = await response.data;
+        setProducts(list.reverse());
       } catch (error) {
         console.error('Error fetching product types:', error);
       }

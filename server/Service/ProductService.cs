@@ -12,7 +12,6 @@ namespace Services
     {
         public ProductRepository Repository { get; set; }
         public ProductTypeService TypeService { get; set; }
-        public UserService userService { get; set; }
 
 
 
@@ -20,7 +19,6 @@ namespace Services
         {
             this.Repository = new ProductRepository(_db);
             this.TypeService = new ProductTypeService(_db);
-            this.userService = new UserService(_db);
         }
         public async Task<Product> CreateProduct(CreateProductDTO product, IFormFile profilePicture)
         {

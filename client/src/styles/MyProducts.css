@@ -1,14 +1,12 @@
 .myProducts{
-    margin-top: 550px;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .products-wrapper{
-    margin-top: 200px;
+    margin: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;

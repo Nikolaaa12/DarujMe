@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import image from '../resources/12345.jpg';
 import '../styles/Product.css';
 import axios from 'axios';
@@ -19,6 +19,7 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
   });
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [showLabel, setShowLabel] = useState(false);
   const [reportProductContent, setReportProductContent] = useState('');
 
   const toggleModal = () => {
@@ -73,7 +74,7 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
     if (product && product.available === true) {
       return;
     }
-    if (product && product.isSent === true) {
+    if (showLabel || (product && product.isSent === true)) {
       return (<p style={{ color: 'green' }}>Sent</p>)
     }
     else {
@@ -115,7 +116,9 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
         console.error('Greška pri brisanju proizvoda:', error);
       });
   }
-
+// useEffect(() =>(
+//   isSent()
+// ), [showLabel])
 
 
 
@@ -127,6 +130,8 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
       isSent: product.isSent,
     })
     console.log('Odgovor od servera:', response.data);
+
+    setShowLabel(true);
   }
 
   const handleReportProduct = async () => {
