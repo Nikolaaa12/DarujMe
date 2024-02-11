@@ -1,7 +1,6 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useState } from 'react';
-import Home from './pages/Home';
 import About from './pages/About';
 import SignIn from './pages/Sign-in';
 import Register from './pages/Register';
@@ -65,7 +64,7 @@ function App() {
         <Navbar userId={userId} setUserId={setUserId}/>
         <main className='main'>
           <Routes>
-            <Route path="/" element={<Home userId={userId}/>}></Route>
+            <Route path='/' element={<Products userId={userId}/>}></Route>
             <Route path='/pages/about' element={<About />}></Route>
             <Route path='/ProductType' element={<ProductType />}></Route>
             <Route path='/pages/SignIn' element={<SignIn setUserId={setUserId}/>}></Route>
@@ -73,7 +72,6 @@ function App() {
             <Route path='/pages/myprofile/:userId' element={<MyProfile />}></Route>
             <Route path='/pages/reports' element={<Reports/>}></Route>
             <Route path='/pages/addProduct' element={<AddProduct userId={userId}/>}></Route>
-            <Route path='/pages/products' element={<Products userId={userId}/>}></Route>
             <Route path='/pages/myproducts' element={<MyProducts userId={userId}/>}></Route>
             <Route path='/pages/editprofile' element={<Edit userId={userId}/>}></Route>
             <Route path='/pages/myreservations' element={<MyReservations userId={userId}/>}></Route>

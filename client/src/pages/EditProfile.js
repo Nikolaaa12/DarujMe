@@ -101,10 +101,10 @@ const clearProfilePicture = () => {
   
   return (
     <div className="gradient-custom-2">
-      <MDBContainer className="py-5 h-100">
+      <MDBContainer  className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="9" xl="7">
-            <MDBCard>
+            <MDBCard style={{backgroundColor:'#a9a9a9'}}>
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5 form-container">
                   <h2 className="h2-responsive text-center mb-4">Edit Profile</h2>
@@ -163,7 +163,7 @@ const clearProfilePicture = () => {
                       onChange={(e) => setUser({ ...user, adress: e.target.value })}
                     />
 
-                    <MDBBtn type="submit" submit='true' >Update Profile</MDBBtn>
+                    <MDBBtn style={{backgroundColor:'#3a3a3a', width:'100%', border:'none'}} type="submit" submit='true' >Update Profile</MDBBtn>
                   </form>
                 </div>
               </MDBCardBody>

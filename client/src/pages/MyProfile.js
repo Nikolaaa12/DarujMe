@@ -15,6 +15,8 @@ function MyProfile() {
     const [reportUserContent, setReportUserContent] = useState('');
 
     useEffect(() => {
+
+
         const fetchUser = async () => {
             try {
 
@@ -54,24 +56,18 @@ function MyProfile() {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            try {
-                //const response = await axios.get(`http://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`); // Adjust the URL according to your backend route
-
-                const response = await fetch(`https://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`, {
-                    headers: { 'Authorization': 'Bearer ' + Cookies.get('jwt') },
-                    method: 'GET',
-                    credentials: 'include',
-                });
-
-                if (!response.data) {
-                    setPrducts(null);
-                } else {
-                    setPrducts(response.data);
-
-                }
-            } catch (error) {
-                console.error('Error fetching user:', error);
+          try {
+            const response = await axios.get(`http://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`); // Adjust the URL according to your backend route
+           
+            if (!response.data) {
+              setPrducts(null);
+            } else {
+              setPrducts(response.data);
+     
             }
+          } catch (error) {
+            console.error('Error fetching user:', error);
+          }
         };
         fetchProducts();
     }, [products]);
@@ -95,16 +91,16 @@ function MyProfile() {
             setPrducts(response.data);
 
         }
-
+        console.log(products);
     }
 
     return (
-        <div className="gradient-custom-2" style={{ backgroundImage: 'linear-gradient(to top, rgba(25, 25, 112, 1), rgba(0, 150, 255, 0.6), rgba(25, 25, 112, 1))' }}>
+        <div style={{ backgroundColor:'#fafafa' }}>
             <MDBContainer className="py-5 h-100">
                 <MDBRow className="justify-content-center align-items-center h-100">
                     <MDBCol lg="9" xl="7">
                         <MDBCard>
-                            <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: 'rgba(25, 25, 112, 1)', height: '200px' }}>
+                            <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#1a1a1a', height: '200px' }}>
                                 <div>
 
                                 </div>
@@ -127,12 +123,7 @@ function MyProfile() {
                                 </idv>
                             </div>
                             <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
-                                <div className="d-flex justify-content-end text-center py-1">
-                                    <div>
-                                        <MDBCardText className="mb-1 h5">{user ? user.products.length : 'Loading...'}</MDBCardText>
-                                        <MDBCardText className="small text-muted mb-0">Products added</MDBCardText>
-                                    </div>
-                                </div>
+                                
                             </div>
                             {showReportDiv && (<div className='my-profile-report-div-content'>
                                 <label className='report-user-title'>Report user</label>
@@ -154,26 +145,15 @@ function MyProfile() {
                                 <div className="d-flex justify-content-between align-items-center mb-4">
                                     <MDBCardText className="lead fw-normal mb-0">Recently added</MDBCardText>
                                 </div>
-                                <MDBRow>
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className="g-2">
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                    <MDBCol className="mb-2">
-                                        <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                                            alt="image 1" className="w-100 rounded-3" />
-                                    </MDBCol>
-                                </MDBRow>
+                                <MDBCardBody className="text-black p-4">
+                                <div style={{display:'flex', flexDirection:'column'}} className="row" >
+                                {products && products.map(product => (
+                                 <div key={product.id} className="col-lg-4 mb-3">
+                                  <Product product={product} showButton={false} showButton2={true} />
+                                    </div>
+                                  ))}
+                                 </div>
+                                </MDBCardBody>
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>

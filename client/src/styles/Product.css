@@ -4,19 +4,24 @@
 }
 
 .product-card h2{
-  color: white;
+  color: black;
   font-weight: 500;
   font-size: 20px;
 }
 
 .product-card{
-  width: fit-content;
+  min-width: 600px;
+  min-height: 300px;
+  background-color: #9e9d9d80;
   height: fit-content;
   border: 2px solid rgba(255,255,255,0.3);
   padding: 2rem;
   border-radius: 16px;
   display: flex;
-  flex-direction: column;
+  gap: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
 
 .report-product-div{
@@ -32,9 +37,18 @@
 .report-product-label{
   display: flex;
   flex-direction: row;
+  border-radius: 8px;
   justify-content: end;
   color: wheat;
   margin-bottom: 5px;
   font-size: 17px;
   cursor: pointer;
+}
+
+.product-content{
+  min-width: 250px;
+}
+
+.product-content button{
+  width: 30%;
 }

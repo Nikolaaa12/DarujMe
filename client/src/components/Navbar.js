@@ -57,7 +57,6 @@ function CustomNavbar({ userId, setUserId }) {
 
   const [user, setUser] = useState(null);
 
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -66,11 +65,11 @@ function CustomNavbar({ userId, setUserId }) {
           method: 'GET',
           credentials: 'include',
         });
-
+ 
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }
-
+ 
         const userData = await response.json();
         setUser(userData);
         console.log(user);
@@ -79,30 +78,31 @@ function CustomNavbar({ userId, setUserId }) {
         setUser(null); // Reset user state in case of error
       }
     };
-
+ 
     fetchUser();
-  }, [userId]);
-  return (
-    <>
-      <Navbar id='myNavbar' fixed="top" collapseOnSelect expand="lg" bg="light" data-bs-theme="light">
-        <Container>
-          <Navbar.Brand href="/">DarujMe</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              {user && user.admin && (
-                <>
-                  <NavDropdown title="Admin" id="collapsible-nav-dropdown">
-                    <NavDropdown.Item href="/ProductType">Product type</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/pages/reports">Reported products</NavDropdown.Item>
-                    <NavDropdown.Item href="/pages/reports">Reported users</NavDropdown.Item>
-                  </NavDropdown></>)}
-            </Nav>
+  }, [userId])
+
+
+    return (
+        <>
+            <Navbar id='myNavbar' fixed="top" collapseOnSelect expand="lg" className='navbarT' data-bs-theme="light">
+                <Container>
+                    <Navbar.Brand href="/">DarujMe</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            {user && user.admin && (
+                            <>
+                            <NavDropdown title="Admin" id="collapsible-nav-dropdown">
+                                <NavDropdown.Item href="/ProductType">Product type</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/pages/reports">Reported products</NavDropdown.Item>
+                                <NavDropdown.Item href="/pages/reports">Reported users</NavDropdown.Item>
+                            </NavDropdown></>)}
+                        </Nav>
 
             <Nav className="me-auto">
               {userId!=-1 && (<Nav.Link href="/pages/addProduct"><button className='navbarBtn'>Add product</button></Nav.Link>)}             
-              <Nav.Link href='/pages/products' style={{ display: 'flex', alignItems: 'center' }}>Products</Nav.Link>
               <Nav.Link href='/pages/about' style={{ display: 'flex', alignItems: 'center' }}>About us</Nav.Link>
             </Nav>
 

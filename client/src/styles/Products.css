@@ -1,12 +1,11 @@
 .products{
     width: 100vw;
-    background-image: linear-gradient(to right, rgb(0, 0, 60), rgba(26, 159, 195, 0.6), rgb(0, 0, 60));
     height: 130vh;
 }
 
 .tipFilterBar{
     width: 100vw;
-    background-color: white;
+    background-color: #9e9d9d3d;
     display: flex;
     margin-bottom: 2rem;
     align-items: center;
@@ -16,18 +15,17 @@
 
 .tipFilterBar button{
     color: black;
-    background-color: white;
     height: 3rem;
     border: none;
 }
 
 .tipFilterBar button:hover{
-    background-color: rgba(26, 159, 195, 0.6);
+    background-color: #9e9d9d3d;
     color: white;
 }
 
 .tipDugme.active{
-    background-color: rgba(26, 159, 195, 0.6);
+    background-color: #9e9d9d3d;
 }
 
 .prikaziSve:hover{
@@ -44,11 +42,13 @@
   border-radius: 16px;
 }
 
-.products-wrapper{
-  padding: 5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Automatski rasporedi proizvode u redove sa minimalno 300px širine */
-  grid-gap: 20px;
+.products-wrapper1{
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3rem;
 }
 
   
