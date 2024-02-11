@@ -95,7 +95,7 @@ function Products({userId}) {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
           <input type='text' placeholder='Search by name...' onChange={handleNameChange}></input>
         </div>
-        <div className='products-wrapper'>
+        <div className='products-wrapper1'>
           {filteredProducts
             .filter(product => product.available === true && product.ownerId !== userId) // Filter products where available is true
             .map((product, index) => (

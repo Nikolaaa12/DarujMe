@@ -3,11 +3,14 @@ import image from '../resources/12345.jpg';
 import '../styles/Product.css';
 import axios from 'axios';
 import Cookies from 'js-cookie'
-import {ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import noImage from '../resources/no-image.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function Product({ product, showButton, userId, refreshProducts, showButton2, products, setProducts, sendBtn }) {
+
+  const navigate=useNavigate();
 
   const [data, setData] = useState({
     ownerId: '',
@@ -58,7 +61,7 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
   }
 
   function isAvailable() {
-    if (product.available === true) {
+    if (product && product.available === true) {
       return (<p style={{ color: 'green' }}>Available</p>)
     }
     else {
@@ -67,10 +70,10 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
   }
 
   function isSent() {
-    if (product.available === true) {
+    if (product && product.available === true) {
       return;
     }
-    if (product.isSent === true) {
+    if (product && product.isSent === true) {
       return (<p style={{ color: 'green' }}>Sent</p>)
     }
     else {
@@ -114,12 +117,12 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
   }
 
 
-  
 
-  const url="http://localhost:5238/api/Product/ChangeState"
+
+  const url = "http://localhost:5238/api/Product/ChangeState"
 
   async function Send() {
-    const response= await axios.put(url, {
+    const response = await axios.put(url, {
       id: product.id,
       isSent: product.isSent,
     })
@@ -133,7 +136,7 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
       Product: product,
       IdUser: userId
     };
-  
+
     const response = await axios.post(
       'http://localhost:5238/api/Report/CreateReport',
       reportData,
@@ -147,32 +150,37 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
     );
 
     console.log(response);
-  
+
     if (response.status === 200) {
       console.log(response)
       setModalOpen(false);
       setReportProductContent('');
     }
-   };
+  };
+
+  function handleRedirect(){
+    navigate(`/pages/myprofile/${product.ownerId}`);
+  }
 
   return (
     <div className='product-card'>
 
-      {product.profilePicture === "null"
-        ? <img src={noImage} alt="No Image" style={{ width: '100px', height: '100px' }} />
-        : <img src={"data:image/jpeg;base64," + product.profilePicture} alt="Profile" style={{ width: '100px', height: '100px' }} />
-      }
-      <label className='report-product-label' onClick={toggleModal}>Report</label>
-      <img src={"data:image/jpeg;base64," + product.profilePicture} alt="Profile" style={{ width: '100px', height: '100px' }} />
+      {product && product.profilePicture ? (
+        <img src={"data:image/jpeg;base64," + product.profilePicture} alt="Profile" />
+      ) : (
+        <img src={noImage} alt="No Image" />
+      )}
+      <button style={{ backgroundColor: '#1d1d1d', color: 'white' }} className='report-product-label' onClick={toggleModal}>Report</button>
       <div className="product-content">
-        <h2>{product.name}</h2>
-        <h2>{product.description}</h2>
+        <h2>{product && product.name}</h2>
+        <label style={{cursor:'pointer', textDecoration:'underline'}} onClick={()=>handleRedirect()}>See profile</label>
+        <h2>{product && product.description}</h2>
         {isAvailable()}
         {isSent()}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Reserve</button>}
-          {!product.isSent && showButton2 && <button type="submit" onClick={handleDelete} className="download-button">Delete</button>}
-          {sendBtn && !product.available && !product.isSent && <button onClick={Send}>Send</button>}
+          {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button" style={{ backgroundColor: '#1d1d1d', color: 'white', borderRadius: '8px' }}>Reserve</button>}
+          {product && !product.isSent && showButton2 && <button type="submit" onClick={handleDelete} className="download-button" style={{ backgroundColor: '#1d1d1d', color: 'white', borderRadius: '8px' }}>Delete</button>}
+          {sendBtn && !product.available && !product.isSent && <button style={{ backgroundColor: '#1d1d1d', color: 'white', borderRadius: '8px' }} onClick={Send}>Send</button>}
         </div>
       </div>
 
@@ -187,7 +195,7 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
                 </div>
                 <div className="modal-body">
                   <div className='report-product-div'>
-                    <textarea  className="report-product-input" rows="3" placeholder='Report product...' type='text' required onChange={(e) => setReportProductContent(e.target.value)}/>
+                    <textarea className="report-product-input" rows="3" placeholder='Report product...' type='text' required onChange={(e) => setReportProductContent(e.target.value)} />
                   </div>
                 </div>
                 <div className="modal-footer">
@@ -198,10 +206,10 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
             </div>
           </div>
         </div>
-        
+
       )}
     </div>
-    
+
   );
 }
 
