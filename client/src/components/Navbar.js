@@ -59,11 +59,11 @@ function CustomNavbar({userId, setUserId}) {
     useEffect(() => {
         const fetchUser = async () => {
           try {
-            const response = await axios.get(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
-                headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
-                method: 'GET',
-                credentials: 'include',
-              }); // Adjust the URL according to your backend route
+            const response = await fetch(`http://localhost:5238/api/User/GetUser`, {
+              headers: { 'Authorization': 'Bearer ' + Cookies.get('jwt') },
+              method: 'GET',
+              credentials: 'include',
+            }); // Adjust the URL according to your backend route
 
             // const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`);
             

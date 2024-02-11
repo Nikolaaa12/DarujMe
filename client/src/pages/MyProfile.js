@@ -79,8 +79,22 @@ const handleShowReportDiv = () => {
     setShowReportDiv(!showReportDiv);
 };
 
-const handleReportUser = () => {
+const handleReportUser = async () => {
     setShowReportDiv(false);
+
+    const response = await fetch(`https://localhost:5238/api/UserReport/CreateUserReport?id=${userId}`, {
+        headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
+        method: 'GET',
+        credentials: 'include',
+    });
+    
+    if (!response.data) {
+      setPrducts(null);
+    } else {
+      setPrducts(response.data);
+
+    }
+
 }
 
     return (

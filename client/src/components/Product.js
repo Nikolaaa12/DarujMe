@@ -170,8 +170,8 @@ function Product({ product, showButton, userId, refreshProducts, showButton2, pr
         {isAvailable()}
         {isSent()}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Preuzmi</button>}
-          {showButton2 && <button type="submit" onClick={handleDelete} className="download-button">Obrisi</button>}
+          {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Reserve</button>}
+          {!product.isSent && showButton2 && <button type="submit" onClick={handleDelete} className="download-button">Delete</button>}
           {sendBtn && !product.available && !product.isSent && <button onClick={Send}>Send</button>}
         </div>
       </div>

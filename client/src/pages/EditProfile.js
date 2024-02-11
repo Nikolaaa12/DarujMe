@@ -17,33 +17,33 @@ function Edit({userId}) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      try {
-        if(userId !== -1)
-        {
-          const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
-              headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
-              method: 'GET',
-              credentials: 'include',
-            }); // Adjust the URL according to your backend route
+      const response = await fetch(`http://localhost:5238/api/User/GetUser`, {
+        headers: { 'Authorization': 'Bearer ' + Cookies.get('jwt') },
+        method: 'GET',
+        credentials: 'include',
+      }); 
         
-          if (!response.data) {
-            setUser(null);
-          } else {
-            setUser(response.data);
-            if(response.data.profilePicture)
-              setProfilePicturePreview("data:image/jpeg;base64," +response.data.profilePicture);
-          }
+      if (!response.ok) {
+        setUser(null);
+      } else {
+        const userData = await response.json();
+        setUser(userData);
+        
+        // Check if profilePicture exists in the response before accessing it
+        if (userData && userData.profilePicture) {
+          setProfilePicturePreview("data:image/jpeg;base64," + userData.profilePicture);
         }
-        
-      } catch (error) {
-        console.error('Error fetching user:', error);
       }
-    };
+    }
     fetchUser();
-}, [userId]);
+}, []);
 
 function submit(e) {
   e.preventDefault();
+
+  if (!user) {
+    return; // Exit the function if user is null
+  }
 
   const formData = new FormData();
   formData.append('id', user.id);
