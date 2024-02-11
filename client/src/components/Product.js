@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import image from '../resources/12345.jpg';
 import '../styles/Product.css';
 import axios from 'axios';
+import Cookies from 'js-cookie'
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,6 +13,13 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
     productId:'',
     customerId:''
   });
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [reportProductContent, setReportProductContent] = useState('');
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
   function submit(e) {
     e.preventDefault();
@@ -93,9 +101,38 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
       });
   }
 
+  const handleReportProduct = async () => {
+
+    const reportData = {
+      Description: reportProductContent,
+      Product: product,
+      IdUser: userId
+    };
+  
+    const response = await axios.post(
+      'http://localhost:5238/api/Report/CreateReport',
+      reportData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Cookies.get('jwt')
+        },
+        withCredentials: true
+      }
+    );
+
+    console.log(response);
+  
+    if (response.status === 200) {
+      console.log(response)
+      setModalOpen(false);
+      setReportProductContent('');
+    }
+   };
+
   return (
     <div className='product-card'>
-      {/* <img src={image} alt="Product" /> */}
+      <label className='report-product-label' onClick={toggleModal}>Report</label>
       <img src={"data:image/jpeg;base64," + product.profilePicture} alt="Profile" style={{ width: '100px', height: '100px' }} />
       <div className="product-content">
         <h2>{product.name}</h2>
@@ -104,7 +141,33 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
         {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Preuzmi</button>}
         {showButton2 && <button type="submit" onClick={handleDelete} className="download-button">Obrisi</button>}
       </div>
+
+      {modalOpen && (
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div className="modal fade show" style={{ display: 'block' }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Report product</h5>
+                  <button type="button" className="btn-close" onClick={toggleModal} aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  <div className='report-product-div'>
+                    <textarea  className="report-product-input" rows="3" placeholder='Report product...' type='text' required onChange={(e) => setReportProductContent(e.target.value)}/>
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" onClick={toggleModal}>Close</button>
+                  <button type="button" className="btn btn-primary" onClick={handleReportProduct}>Report</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      )}
     </div>
+    
   );
 }
 

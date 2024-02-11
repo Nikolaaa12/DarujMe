@@ -15,6 +15,7 @@ import MyProducts from './pages/MyProducts';
 import Edit from './pages/EditProfile';
 import ProductType from './pages/ProductType';
 
+
 function App() {
   const [userId, setUserId] = useState(-1);
   const [user, setUser] = useState(null);

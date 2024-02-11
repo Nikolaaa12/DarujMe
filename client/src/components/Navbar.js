@@ -118,7 +118,6 @@ function CustomNavbar({userId, setUserId}) {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-
         </>
     )
 }

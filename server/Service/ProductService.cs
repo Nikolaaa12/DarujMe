@@ -13,7 +13,6 @@ namespace Services
         public ProductRepository Repository { get; set; }
         public ProductTypeService TypeService { get; set; }
         public UserService userService{ get; set; }
-    
 
 
         public ProductService(MongoDbContext _db)

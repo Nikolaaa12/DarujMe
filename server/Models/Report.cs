@@ -11,7 +11,7 @@ namespace Models{
         [BsonRepresentation(BsonType.ObjectId)]
         public String? Id { get; set; }
         public string? Description { get; set; } 
-        public string? IdProduct { get; set; }
+        public Product? Product { get; set; }
         public string? IdUser { get; set; }
 
         public Report()

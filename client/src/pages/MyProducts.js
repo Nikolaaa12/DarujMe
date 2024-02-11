@@ -11,47 +11,55 @@ function MyProducts({userId}) {
 
     useEffect(() => {
         const fetchUser = async () => {
-          try {
-            const response = await fetch(`http://localhost:5238/api/User/GetUserById?id=${userId}`, {
-              headers:{'Authorization': 'Bearer ' + Cookies.get('jwt')},
-              method: 'GET',
-              credentials: 'include',
-            }); // Adjust the URL according to your backend route
-            
-            if (!response.data) {
-              setUser(null);
-            } else {
-              setUser(response.data);
-            }
-          } catch (error) {
-            console.error('Error fetching user:', error);
+          const response = await fetch('http://localhost:5238/api/User/GetUser', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            mode: 'cors',
+          });
+
+          if (response.status !== 200) {
+           // <Navigate to="/login" />;
+            return;
           }
+
+          const content = await response.json();
+          //setUserId(content.id);
+          console.log(content);
+          setUser(content);
         };
         fetchUser();
-    }, [userId]);
+    }, []);
 
-    console.log(user);
+    
 
     const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5238/api/Product/GetProductsByOwnerId?id=${userId}`);
-        setProducts(response.data);
+        const response = await axios.get(`http://localhost:5238/api/Product/GetProductsByOwnerId?id=${user.id}`);
+
+        if (response.status !== 200) {
+          // <Navigate to="/login" />;
+           return;
+         }
+
+        const content = await response.data;
+        console.log(content);
+        setProducts(content);
       } catch (error) {
         console.error('Error fetching product types:', error);
       }
     };
 
     fetchProducts();
-  }, [userId]);
+  }, [user]);
 
   return (
     <div className='myProducts'>
       <div className='products-wrapper'>
       {products.map(product=>(
-        <Product product={product} showButton={false} showButton2={true}/>
+        <Product product={product} showButton={false} showButton2={true} userId={userId}/>
       ))}
       </div>
       </div>

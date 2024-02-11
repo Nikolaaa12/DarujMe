@@ -60,11 +60,12 @@ namespace Controllers
         }
         [HttpPost]
         [Route("CreateReport")]
-        public async Task<IActionResult> CreateReport(Report? report)
+        public async Task<IActionResult> CreateReport([FromBody]Report? report)
         {
             var a = await _service.Repository.Create(report);
             return Ok(a);
         }
+
 
 
 

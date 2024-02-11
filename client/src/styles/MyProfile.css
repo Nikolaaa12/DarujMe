@@ -1,3 +1,58 @@
 .gradient-custom-2{
     background-image: linear-gradient(to right, rgb(0, 0, 60), rgba(26, 159, 195, 0.6), rgb(0, 0, 60));
 }
+
+.my-profile-report-div{
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding: 15px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.report-label{
+    cursor: pointer;
+}
+
+.my-profile-report-div-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+
+.report-user-title{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.report-user-input{
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.report-user-button-div{
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+
+}
+
+.report-user-button{
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: rgba(4, 201, 46, 0.719);
+}
+
+.report-user-button:hover{
+    background-color: rgb(4, 201, 47);
+}
