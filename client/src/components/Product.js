@@ -5,13 +5,14 @@ import axios from 'axios';
 import Cookies from 'js-cookie'
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import noImage from '../resources/no-image.jpg';
 
-function Product({product, showButton, userId, refreshProducts,showButton2, products, setProducts}){
+function Product({ product, showButton, userId, refreshProducts, showButton2, products, setProducts, sendBtn }) {
 
   const [data, setData] = useState({
-    ownerId:'',
-    productId:'',
-    customerId:''
+    ownerId: '',
+    productId: '',
+    customerId: ''
   });
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,18 +29,18 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
       // Display an error message or redirect to the login page
       toast.error('You need to log in to take a product', {
         className: 'custom-toast',
-      bodyClassName: 'custom-toast-body',
-      autoClose: 3000,
+        bodyClassName: 'custom-toast-body',
+        autoClose: 3000,
       });
       return;
     }
 
-  const isConfirmed = window.confirm('Are you sure you want create reservation?');
+    const isConfirmed = window.confirm('Are you sure you want create reservation?');
 
-  if (!isConfirmed) {
-    // User clicked "Cancel" in the confirmation dialog
-    return;
-  }
+    if (!isConfirmed) {
+      // User clicked "Cancel" in the confirmation dialog
+      return;
+    }
     axios.post('http://localhost:5238/api/Reservation/CreateReservation', {
       ownerId: product.ownerId,
       productId: product.id,
@@ -51,17 +52,29 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
           bodyClassName: 'custom-toast-body',
           autoClose: 3000,
         });
-        product.available=false;
+        product.available = false;
         refreshProducts();
       })
   }
 
-  function isAvailable(){
-    if (product.available===true){
-      return(<p style={{color:'green'}}>Available</p>)
+  function isAvailable() {
+    if (product.available === true) {
+      return (<p style={{ color: 'green' }}>Available</p>)
     }
-    else{
-      return(<p style={{color:'red'}}>Reserved</p>)
+    else {
+      return (<p style={{ color: 'red' }}>Reserved</p>)
+    }
+  }
+
+  function isSent() {
+    if (product.available === true) {
+      return;
+    }
+    if (product.isSent === true) {
+      return (<p style={{ color: 'green' }}>Sent</p>)
+    }
+    else {
+      return (<p style={{ color: 'red' }}>Not sent</p>)
     }
   }
 
@@ -73,7 +86,6 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
     if (!isConfirmed) {
       return;
     }
-
     axios
       .delete(`http://localhost:5238/api/Product/DeleteProduct?id=${productId}`, {
         headers: {
@@ -99,6 +111,19 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
 
         console.error('Greška pri brisanju proizvoda:', error);
       });
+  }
+
+
+  
+
+  const url="http://localhost:5238/api/Product/ChangeState"
+
+  async function Send() {
+    const response= await axios.put(url, {
+      id: product.id,
+      isSent: product.isSent,
+    })
+    console.log('Odgovor od servera:', response.data);
   }
 
   const handleReportProduct = async () => {
@@ -132,14 +157,23 @@ function Product({product, showButton, userId, refreshProducts,showButton2, prod
 
   return (
     <div className='product-card'>
+
+      {product.profilePicture === "null"
+        ? <img src={noImage} alt="No Image" style={{ width: '100px', height: '100px' }} />
+        : <img src={"data:image/jpeg;base64," + product.profilePicture} alt="Profile" style={{ width: '100px', height: '100px' }} />
+      }
       <label className='report-product-label' onClick={toggleModal}>Report</label>
       <img src={"data:image/jpeg;base64," + product.profilePicture} alt="Profile" style={{ width: '100px', height: '100px' }} />
       <div className="product-content">
         <h2>{product.name}</h2>
         <h2>{product.description}</h2>
         {isAvailable()}
-        {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Preuzmi</button>}
-        {showButton2 && <button type="submit" onClick={handleDelete} className="download-button">Obrisi</button>}
+        {isSent()}
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {showButton && <button type="submit" onClick={(e) => submit(e)} className="download-button">Preuzmi</button>}
+          {showButton2 && <button type="submit" onClick={handleDelete} className="download-button">Obrisi</button>}
+          {sendBtn && !product.available && !product.isSent && <button onClick={Send}>Send</button>}
+        </div>
       </div>
 
       {modalOpen && (

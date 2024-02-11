@@ -67,6 +67,13 @@ namespace Controllers
             var a = await _service.Repository.GetReservationsByOwnerId(id);
             return Ok(a);
         }
+        [HttpGet]
+        [Route("GetReservationsByCustomerId")]
+        public async Task<IActionResult> GetReservationsByCustomerId(String? id)
+        {
+            var a = await _service.Repository.GetReservationsByCustomerId(id);
+            return Ok(a);
+        }
 
 
     }

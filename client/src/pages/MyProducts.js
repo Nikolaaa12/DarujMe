@@ -59,7 +59,7 @@ function MyProducts({userId}) {
     <div className='myProducts'>
       <div className='products-wrapper'>
       {products.map(product=>(
-        <Product product={product} showButton={false} showButton2={true} userId={userId}/>
+        <Product product={product} showButton={false} showButton2={true} sendBtn={true} userId={userId}/>
       ))}
       </div>
       </div>

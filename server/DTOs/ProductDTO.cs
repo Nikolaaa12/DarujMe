@@ -10,4 +10,10 @@ namespace DTOs
         public string? ProductTypeId { get; set; }
         public string? OwnerId { get; set; }
     }
+
+    public class ChangeStateDTO
+    {
+        public string? Id {get; set;}
+        public Boolean isSent {get; set;}
+    }
 }

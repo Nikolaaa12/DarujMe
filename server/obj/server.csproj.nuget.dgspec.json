@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< Updated upstream
     "C:\\VII semestar\\DarujMe\\server\\server.csproj": {}
   },
   "projects": {
@@ -12,13 +13,27 @@
         "projectPath": "C:\\VII semestar\\DarujMe\\server\\server.csproj",
         "packagesPath": "C:\\Users\\predr\\.nuget\\packages\\",
         "outputPath": "C:\\VII semestar\\DarujMe\\server\\obj\\",
+=======
+    "C:\\Users\\Korisnik\\Desktop\\pr\\DarujMe\\server\\server.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Korisnik\\Desktop\\pr\\DarujMe\\server\\server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\pr\\DarujMe\\server\\server.csproj",
+        "projectName": "server",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\pr\\DarujMe\\server\\server.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\pr\\DarujMe\\server\\obj\\",
+>>>>>>> Stashed changes
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
+<<<<<<< Updated upstream
           "C:\\Users\\predr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> Stashed changes
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -88,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
