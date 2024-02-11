@@ -50,11 +50,15 @@ namespace Controllers
         [Route("DeleteProduct")]
         public async Task<IActionResult> DeleteProduct(String? id)
         {
-            var reservation = await _reservationService.Repository.GetReservationByProductId(id);
             try
             {
+                var reservation = await _reservationService.Repository.GetReservationByProductId(id);
                 await _service.Repository.DeleteProduct(id);
-                await _reservationService.Repository.DeleteReservation(reservation.Id);
+                if(reservation != null)
+                {
+                    await _reservationService.Repository.DeleteReservation(reservation.Id);
+                }
+                
                 return Ok();
             }
             catch (Exception e)
