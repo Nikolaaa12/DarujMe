@@ -8,9 +8,11 @@ using MongoDB.Bson;
 using DTOs;
 using Services.IServices;
 using Services;
+using Microsoft.AspNetCore.Authorization;
 namespace Controllers
 {
 
+    [Authorize(Roles = ("Admin"))]
     [Controller]
     [Route("api/Product")]
     public class ProductController : ControllerBase
